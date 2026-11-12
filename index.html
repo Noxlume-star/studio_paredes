@@ -328,13 +328,71 @@ function ed(src,asp){return new Promise(async res=>{
   draw();d.showModal()})}
 function put(k,i,id){if(k==='p'){if(S.photo)DEL.push(S.photo.id);S.photo={id}}else if(k==='b'){if(S.brand)DEL.push(S.brand.id);S.brand={id}}else if(k==='c'){if(S.certs[i].img)DEL.push(S.certs[i].img);S.certs[i].img=id}else S.gal[k].push({id})}
 async function up(fs,k,i){
-  for(const f of fs){const bl=await ed(f,ASP[k]);if(!bl)continue;msg('Subiendo…');
-    try{const r=await api('upload',{method:'POST',headers:{'content-type':'image/jpeg'},body:bl});put(k,i,(await r.json()).id)}catch(e){msg('No se pudo subir: '+e.message);return}}
-  render();adm();msg('Listo. Pulsa «Publicar cambios».')}
-async function editImg(k,i){const cur=k==='p'?S.photo.id:k==='b'?S.brand.id:k==='c'?S.certs[i].img:S.gal[k][i].id;
-  const bl=await ed(pu(cur),ASP[k]);if(!bl)return;msg('Subiendo…');
-  try{const id=(await(await api('upload',{method:'POST',headers:{'content-type':'image/jpeg'},body:bl})).json()).id;DEL.push(cur);
-    if(k==='p')S.photo={id};else if(k==='b')S.brand={id};else if(k==='c')S.certs[i].img=id;else S.gal[k][i]={id};render();adm();msg('Listo. Pulsa «Publicar cambios».')}catch(e){msg('No se pudo subir: '+e.message)}}
+  for(const f of fs){
+    const bl=await ed(f,ASP[k]);
+    if(!bl)continue;
+
+    msg('Subiendo…');
+
+    try{
+      const r=await api('upload',{
+        method:'POST',
+        headers:{'content-type':'image/jpeg'},
+        body:bl
+      });
+
+      const d=await r.json();
+      if(!r.ok)throw new Error(d.error||'No se pudo subir la foto');
+      if(!d.id)throw new Error('El servidor no devolvió el ID de la foto');
+
+      put(k,i,d.id);
+    }catch(e){
+      msg('No se pudo subir: '+e.message);
+      return;
+    }
+  }
+
+  render();
+  adm();
+
+  const guardado=await save();
+  if(guardado)msg('¡Fotos guardadas correctamente!');
+}
+
+async function editImg(k,i){
+  const cur=k==='p'?S.photo.id:k==='b'?S.brand.id:k==='c'?S.certs[i].img:S.gal[k][i].id;
+  const bl=await ed(pu(cur),ASP[k]);
+  if(!bl)return;
+
+  msg('Subiendo…');
+
+  try{
+    const r=await api('upload',{
+      method:'POST',
+      headers:{'content-type':'image/jpeg'},
+      body:bl
+    });
+
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'No se pudo subir la foto');
+    if(!d.id)throw new Error('El servidor no devolvió el ID de la foto');
+
+    DEL.push(cur);
+
+    if(k==='p')S.photo={id:d.id};
+    else if(k==='b')S.brand={id:d.id};
+    else if(k==='c')S.certs[i].img=d.id;
+    else S.gal[k][i]={id:d.id};
+
+    render();
+    adm();
+
+    const guardado=await save();
+    if(guardado)msg('¡Foto reemplazada y guardada correctamente!');
+  }catch(e){
+    msg('No se pudo reemplazar la foto: '+e.message);
+  }
+}
 async function chp(){const v=$('#npw').value;if(v.length<8){msg('Mínimo 8 caracteres');return}try{await api('password',{method:'POST',body:JSON.stringify({password:v})});AI.hasOwn=true;adm();msg('Contraseña guardada. Desde ahora entras con ella.')}catch(e){msg(e.message)}}
 async function gen(){try{NEWC=(await(await api('recovery',{method:'POST'})).json()).code;AI.hasRecovery=true;adm();msg('Código generado. Anótalo ahora.')}catch(e){msg(e.message)}}
 $('#fg').onclick=e=>{e.preventDefault();$('#rcv').hidden=false};
@@ -359,9 +417,29 @@ function fx2(){if(!(window.gsap&&window.ScrollTrigger)||isAd()||matchMedia('(pre
 addEventListener('load',()=>{if(window.gsap&&window.ScrollTrigger){gsap.registerPlugin(ScrollTrigger);
   $$('.df').forEach(el=>{const sp=+el.dataset.sp;gsap.fromTo(el,{yPercent:-25*sp,rotation:-12},{yPercent:25*sp,rotation:24,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}})});
   gsap.fromTo('#bf',{scale:.7,borderRadius:'220px'},{scale:1,borderRadius:'20px',ease:'none',scrollTrigger:{trigger:'.bi',start:'top 92%',end:'top 35%',scrub:true}})}fx2()});
-async function save(){msg('Publicando…');
-  try{await api('content',{method:'PUT',body:JSON.stringify(S)});for(const id of DEL)await api('photo/'+encodeURIComponent(id),{method:'DELETE'}).catch(()=>{});DEL=[];msg('¡Cambios publicados!')}
-  catch(e){msg('No se pudo publicar: '+e.message)}}
+async function save(){
+  msg('Guardando cambios…');
+
+  try{
+    await api('content',{
+      method:'PUT',
+      body:JSON.stringify(S)
+    });
+
+    for(const id of DEL){
+      await api('photo/'+encodeURIComponent(id),{
+        method:'DELETE'
+      }).catch(()=>{});
+    }
+
+    DEL=[];
+    msg('¡Cambios guardados!');
+    return true;
+  }catch(e){
+    msg('No se pudieron guardar los cambios: '+e.message);
+    return false;
+  }
+}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
