@@ -1,4 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Isabel Paredes · Studio Paredes · Maquillista profesional a domicilio</title>
+<meta name="description" content="Maquillaje, pestañas, cejas y facial a domicilio. Reserva tu cita con Isabel Paredes.">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fffaf0;--sf:#fff;--ink:#33250f;--mut:#7a6a4c;--gold:#a9780f;--g2:#f2b705;--line:#efe2bd;--dk:#2a1f0b;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#16110a;--sf:#211a0e;--ink:#f6ecd2;--mut:#c9b88f;--gold:#e5b93c;--g2:#ffd23f;--line:#3d3216;--dk:#0e0a05;color-scheme:dark}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font:300 16px/1.7 Jost,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;margin:0}
+section{max-width:1080px;margin:0 auto;padding:84px 22px}
+.eb{display:block;text-align:center;font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:500}
+h2{font-size:clamp(2rem,6vw,2.9rem);text-align:center;margin:8px 0 14px;line-height:1.1}
+h2::after{content:"";display:block;width:56px;height:1px;background:var(--gold);margin:18px auto 0}
+.lead{text-align:center;color:var(--mut);max-width:560px;margin:0 auto 38px}
+nav{position:sticky;top:0;z-index:20;display:flex;gap:26px;justify-content:center;flex-wrap:wrap;padding:14px 16px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
+nav a{color:var(--ink);text-decoration:none;font-weight:400}nav a:hover{color:var(--gold)}
+.hero{text-align:center;padding:84px 22px 76px;background:radial-gradient(ellipse at 50% -10%,rgba(212,169,74,.24),transparent 62%)}
+#phw{width:142px;height:142px;margin:0 auto 26px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--g2),var(--gold))}
+#ph{width:100%;height:100%;border-radius:50%;object-fit:cover;border:3px solid var(--bg);display:block}
+.hero h1{font-size:clamp(3rem,12vw,5.4rem);line-height:1;margin:14px 0 10px;font-weight:500}
+.hero em{font:italic 500 1.4rem 'Cormorant Garamond',serif;color:var(--mut)}
+.btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-block;padding:14px 30px;border-radius:99px;text-decoration:none;font:400 .82rem Jost,sans-serif;letter-spacing:.14em;text-transform:uppercase;border:1px solid transparent;cursor:pointer;transition:transform .3s,box-shadow .3s}
+.btn:hover{transform:translateY(-2px)}.b1{background:#1f8f4e;color:#fff}.b2{background:linear-gradient(135deg,var(--g2),var(--gold));color:#2b1d0a}.b3{background:transparent;border-color:var(--gold);color:var(--gold)}
+.quote{background:var(--dk);color:#f2e8d8;text-align:center;padding:58px 22px}
+#phrase{font:italic 500 clamp(1.5rem,4.6vw,2.2rem)/1.35 'Cormorant Garamond',serif;max-width:760px;margin:0 auto;min-height:3em;display:flex;align-items:center;justify-content:center;transition:opacity .5s}
+.about{max-width:680px;margin:30px auto 0;text-align:center;color:var(--mut);font-size:1.08rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:16px;padding:28px 24px;position:relative;box-shadow:0 12px 32px -22px rgba(60,40,10,.35);transition:transform .4s}
+.card:hover{transform:translateY(-3px)}.card h3{font-size:1.6rem;margin:6px 0}.card p{color:var(--mut);margin:4px 0 14px}
+.no{font:600 1rem 'Cormorant Garamond',serif;color:var(--gold);letter-spacing:.2em}.price{color:var(--gold);font-weight:500;margin-bottom:8px}
+.card a{color:var(--gold);text-decoration:none;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase}
+.home{border:1px solid var(--gold);border-radius:18px;padding:34px 24px;text-align:center;margin-top:26px;background:linear-gradient(135deg,rgba(212,169,74,.1),transparent)}
+.home h3{font-size:1.8rem;color:var(--gold)}.home p{margin:6px 0}
+.off{border-color:var(--gold);background:linear-gradient(135deg,rgba(212,169,74,.16),var(--sf))}
+.tag{display:inline-block;background:var(--gold);color:#fff;border-radius:99px;padding:2px 14px;font-size:.66rem;letter-spacing:.18em}.cd{color:var(--gold);font-weight:500;margin:8px 0}
+.gt{font-size:1.9rem;text-align:center;margin:36px 0 16px}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+.gal .t{aspect-ratio:4/5;border-radius:14px;overflow:hidden;position:relative;background:var(--line)}
+.gal img{width:100%;height:100%;object-fit:cover;cursor:zoom-in;transition:transform .8s;display:block}.gal .t:hover img{transform:scale(1.05)}
+.ct{text-align:center}.ct img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px;margin-bottom:14px;cursor:zoom-in}
+.ci{font-size:1.6rem;color:var(--gold)}.ct small{color:var(--gold);letter-spacing:.14em;text-transform:uppercase;font-size:.7rem}
+.cl{font:italic 500 1.2rem/1.5 'Cormorant Garamond',serif}.cl b{display:block;font:500 .85rem Jost;font-style:normal;color:var(--gold);margin-top:10px;letter-spacing:.1em}.st5{color:var(--g2);letter-spacing:.2em;margin-bottom:6px;font-style:normal}
+form.bk{display:grid;gap:10px;max-width:560px;margin:36px auto 0;text-align:left}
+form.bk h3{text-align:center;font-size:1.7rem}
+form.bk input,form.bk select,form.bk textarea,#adm input,#adm textarea,dialog input{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--sf);color:var(--ink);font:inherit}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+#stars{display:flex;gap:4px;justify-content:center}#stars button{background:none;border:0;font-size:2rem;color:var(--line);cursor:pointer;padding:0 2px}#stars button.on{color:var(--g2)}
+#rmsg{text-align:center;color:var(--gold);min-height:1.4em}
+section.band{max-width:none;background:var(--dk);color:#f2e8d8;padding:70px 22px}
+.sg{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:34px;text-align:center}
+.stat b{display:block;font:600 clamp(2.8rem,9vw,4rem)/1 'Cormorant Garamond',serif;color:var(--g2)}.stat span{letter-spacing:.2em;text-transform:uppercase;font-size:.72rem}
+footer{text-align:center;padding:40px 20px 46px;color:var(--mut);font-size:.88rem}footer a{color:var(--gold)}footer small{display:block;margin-top:8px}
+.wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;background:#1f8f4e;display:grid;place-items:center;box-shadow:0 8px 22px rgba(0,0,0,.3);z-index:5}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease}.rv.in{opacity:1;transform:none}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes line{from{width:0}to{width:90px}}
+#intro{position:fixed;inset:0;z-index:50;display:grid;place-items:center;text-align:center;cursor:pointer;background:radial-gradient(circle at 50% 40%,rgba(212,169,74,.22),transparent 60%),var(--bg);transition:opacity 1.2s ease,visibility 1.2s}
+#intro.out{opacity:0;visibility:hidden}#intro .ib{animation:rise 1.8s ease both}#intro h1{font-size:clamp(2.6rem,10vw,4.4rem);font-weight:500}
+#intro i{display:block;height:1px;background:var(--gold);margin:14px auto;animation:line 2.2s ease .6s both}
+.hero>*{animation:rise 1.3s ease both}
+#lb{position:fixed;inset:0;z-index:60;background:rgba(10,7,4,.93);display:grid;place-items:center;cursor:zoom-out;padding:18px}#lb img{max-width:100%;max-height:92vh;border-radius:10px}
+.x{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;border:0;background:#b3261e;color:#fff;cursor:pointer;z-index:2}
+#adm{display:none;max-width:780px;margin:0 auto;padding:30px 20px 90px;background:var(--sf);border-top:3px solid var(--g2)}body.on #adm{display:block}
+#adm h3{margin:24px 0 8px;color:var(--gold);font-size:1.5rem}#adm input,#adm textarea{margin:3px 0}
+.row{display:grid;grid-template-columns:1fr 1.6fr .8fr auto;gap:6px;align-items:center;margin-bottom:8px}.r2{grid-template-columns:1fr auto}.r3{grid-template-columns:1fr 2fr auto}.row .x{position:static}
+.oc{border:1px solid var(--line);border-radius:12px;padding:10px;margin-bottom:10px}.oc .btn{padding:8px 16px;margin:4px 4px 0 0}
+.dur{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0;align-items:center}.dur button{padding:6px 12px;border-radius:99px;border:1px solid var(--gold);background:none;color:var(--gold);cursor:pointer}
+.bar{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom,0px));display:flex;gap:10px;justify-content:center;margin-top:24px}#msg{text-align:center;color:var(--gold);min-height:1.5em;margin-top:8px}
+dialog{border:1px solid var(--gold);border-radius:18px;background:var(--sf);color:var(--ink);max-width:340px;width:90%}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
 
+#fx{height:560vh;position:relative}
+#fxs{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:linear-gradient(180deg,#ffe9a3 0%,#fff3cb 48%,#fffaf0 100%)}
+@media (prefers-color-scheme:dark){#fxs{background:linear-gradient(180deg,#3a2a0c 0%,#241a0a 55%,#16110a 100%)}}
+#c3{position:absolute;inset:0;width:100%;height:100%;display:block}
+#fxs::after{content:"";position:absolute;inset:auto 0 0;height:46%;background:linear-gradient(transparent,color-mix(in srgb,var(--bg) 78%,transparent));pointer-events:none}
+.cp{position:absolute;left:0;right:0;bottom:9vh;z-index:2;text-align:center;padding:0 22px;opacity:0;pointer-events:none}
+.cp h2{font-size:clamp(2.2rem,8vw,4rem);margin:6px 0 4px}.cp p{color:var(--mut);margin:0 auto;max-width:480px}
+
+html,body{overflow-x:clip}
+section>*{position:relative;z-index:1}section>.df{position:absolute;z-index:0;opacity:.17;pointer-events:none}
+#sobre .bg2{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+.bi{position:relative;aspect-ratio:4/5;max-width:440px;width:100%;margin:0 auto}
+.bf{position:absolute;inset:0;border-radius:220px;overflow:hidden;background:linear-gradient(160deg,#ffe28a,#fff4cf);display:grid;place-items:center;box-shadow:0 30px 60px -30px rgba(120,80,0,.5)}
+.bf img{width:100%;height:100%;object-fit:cover}
+.bt h2{text-align:left}.bt h2::after{margin-left:0}.bt .eb{text-align:left}.bt .about{text-align:left;margin:20px 0}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chips span{border:1px solid var(--gold);color:var(--gold);border-radius:99px;padding:6px 16px;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+.cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:34px 0 6px}
+.cat{position:relative;aspect-ratio:16/10;border-radius:18px;overflow:hidden;display:block}.cat img{width:100%;height:100%;object-fit:cover;transition:transform .9s}.cat:hover img{transform:scale(1.06)}
+.cat span{position:absolute;inset:auto 0 0;padding:44px 20px 16px;background:linear-gradient(transparent,rgba(40,25,0,.7));color:#fff;font:600 1.7rem 'Cormorant Garamond',serif}
+.fg{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:34px;text-align:left;padding:56px 22px 26px}
+.fg h3{font-size:1.9rem;color:var(--gold)}.fg h4{font:500 .75rem Jost;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}.fg a{display:block;color:var(--ink);text-decoration:none;margin:4px 0}.fg a:hover{color:var(--gold)}
+.fb{border-top:1px solid var(--line);padding:20px 20px 0;max-width:1000px;margin:0 auto}
+@media (max-width:760px){#sobre .bg2,.fg{grid-template-columns:1fr}.bt h2,.bt .eb{text-align:center}.bt h2::after{margin-left:auto}.bt .about{text-align:center}.chips{justify-content:center}}
+
+#ed{max-width:390px;width:94%;padding:16px}#edc{display:block;border-radius:12px;touch-action:none;background:#000;cursor:grab;margin:0 auto}
+#ed label{display:block;font-size:.8rem;margin-top:8px;color:var(--mut)}#ed input[type=range]{width:100%;padding:0;border:0}
+.er{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center}.er .btn{padding:10px 18px}
+</style>
+</head>
+<body>
+<div id="intro"><div class="ib"><h1>Isabel Paredes</h1><i></i><span class="eb">Makeup Studio</span></div></div>
+<nav><a href="#servicios">Servicios</a><a href="#ofertas" id="navOf" hidden>Ofertas</a><a href="#galeria" id="navG" hidden>Mi trabajo</a><a href="#resenas">Reseñas</a><a href="#reservar">Reservar</a></nav>
+<div id="fx"><div id="fxs"><canvas id="c3"></canvas>
+<div class="cp"><span class="eb">Maquillaje profesional a domicilio</span><h2>Isabel Paredes</h2><p>Desliza para descubrir ↓</p></div>
+<div class="cp"><span class="eb">Tu belleza, elevada</span><h2>Cada detalle cuenta</h2><p>Labiales, sombras y cosméticos elegidos para realzarte.</p></div>
+<div class="cp"><span class="eb">Dentro del estuche</span><h2>Un universo de color</h2><p>Técnica, cuidado y productos de calidad en cada servicio.</p></div>
+<div class="cp"><span class="eb">Tu momento</span><h2>Donde estés, brillas</h2><div class="btns"><a class="btn b2" href="#reservar">Reservar mi cita</a></div></div>
+</div></div>
+<header class="hero">
+  <div id="phw" hidden><img id="ph" alt="Isabel Paredes"></div>
+  <span class="eb">Makeup Studio · A domicilio</span>
+  <h1>Isabel Paredes</h1>
+  <em>Realzando tu belleza, donde estés.</em>
+  <div class="btns"><a class="btn b2" id="waTop" target="_blank" rel="noopener">Reservar por WhatsApp</a><a class="btn b3" id="igTop" target="_blank" rel="noopener">Instagram</a></div>
+</header>
+<div class="quote"><div id="phrase"></div></div>
+<section id="servicios"><span class="eb">Lo que hago</span><h2>Servicios</h2><p class="lead">Elige tu experiencia de belleza</p><div class="grid" id="svc"></div>
+  <div class="home"><h3>Servicio a domicilio</h3><p id="homeT"></p><p class="price" id="homeC"></p></div></section>
+<section id="pop" hidden><span class="eb">Favoritos de mis clientas</span><h2>Más solicitados</h2><div class="grid" id="pp" style="margin-top:34px"></div></section>
+<section id="galeria" hidden><span class="eb">Portafolio</span><h2>Categorías</h2><div class="cats" id="cats"></div><h3 class="gt" id="gt-mak">Maquillaje</h3><div class="gal" id="gal-mak"></div><h3 class="gt" id="gt-pes">Pestañas</h3><div class="gal" id="gal-pes"></div></section>
+<section id="ofertas" hidden style="padding-bottom:0"><span class="eb">Por tiempo limitado</span><h2>Ofertas especiales</h2><div class="grid" id="off"></div></section>
+<section id="sobre"><div class="bg2"><div class="bi"><div class="bf" id="bf"></div></div><div class="bt"><span class="eb">Conóceme</span><h2>Studio Paredes</h2><div class="about" id="about"></div><div class="chips"><span>Servicio a domicilio</span><span>Productos de calidad</span><span>Trato cálido</span></div></div></div></section>
+<section id="certificaciones" hidden><span class="eb">Formación</span><h2>Certificaciones</h2><div class="grid" id="ct" style="margin-top:34px"></div></section>
+<section id="resenas"><span class="eb">Opiniones</span><h2>Lo que dicen mis clientas</h2><p class="lead" id="rvl"></p><div class="grid" id="rv"></div>
+  <form class="bk" id="rf"><h3>Deja tu reseña</h3><input id="rn" placeholder="Tu nombre" maxlength="60" required><div id="stars"><button type="button" data-r="1">★</button><button type="button" data-r="2">★</button><button type="button" data-r="3">★</button><button type="button" data-r="4">★</button><button type="button" data-r="5">★</button></div><textarea id="rt" rows="3" maxlength="600" placeholder="Cuéntanos tu experiencia" required></textarea><input id="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px"><button class="btn b2" type="submit">Enviar reseña</button><div id="rmsg"></div></form></section>
+<section id="reservar" style="text-align:center"><span class="eb">Agenda</span><h2>Reserva tu cita</h2><p class="lead">Llena tus datos y te respondo por WhatsApp</p>
+  <form class="bk" id="bk" style="margin-top:0"><input id="bn" placeholder="Tu nombre" required autocomplete="name"><select id="bs" required></select><div class="two"><input id="bd" type="date" required><input id="bt" type="time" required></div><input id="ba" placeholder="Dirección o sector donde te atiendo" required><button class="btn b1" type="submit">Enviar solicitud por WhatsApp</button></form>
+  <div class="btns"><a class="btn b3" id="waBot" target="_blank" rel="noopener">WhatsApp 829-369-0116</a><a class="btn b3" id="igBot" target="_blank" rel="noopener">@studio.paredes17</a></div></section>
+<section id="stats" class="band" hidden><div class="sg" id="sg"></div></section>
+<div id="adm"></div>
+<footer>
+  <div class="fg"><div><h3>Studio Paredes</h3><p>Realzando tu belleza, donde estés. Maquillaje, pestañas, cejas y facial a domicilio.</p></div>
+  <div><h4>Contacto</h4><a id="waFt" target="_blank" rel="noopener">WhatsApp 829-369-0116</a><a id="igFt" target="_blank" rel="noopener">@studio.paredes17</a></div>
+  <div><h4>Explora</h4><a href="#servicios">Servicios</a><a href="#galeria">Categorías</a><a href="#resenas">Reseñas</a><a href="#reservar">Reservar</a></div></div>
+  <div class="fb"><div>© <span id="yr"></span> Studio Paredes · Isabel Paredes Makeup Studio. Todos los derechos reservados.</div><small>Hecho por Alec Towers</small><small><a href="#" id="lock" style="display:inline">Acceso privado</a></small></div>
+</footer>
+<a class="wa" id="waFab" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></a>
+<div id="lb" hidden><img alt=""></div>
+<dialog id="ed"><h3 style="color:var(--gold);margin:0 0 8px">Ajustar foto</h3><canvas id="edc"></canvas><p style="font-size:.8rem;color:var(--mut);margin:6px 0 0">Arrastra la foto para moverla.</p><div class="er"><button class="btn b3" id="edl" type="button">⟲ 90°</button><button class="btn b3" id="edr" type="button">⟳ 90°</button></div><label>Ángulo<input id="eda" type="range" min="-45" max="45" step=".5" value="0"></label><label>Zoom (recorte)<input id="edz" type="range" min="1" max="3" step=".01" value="1"></label><div class="er"><button class="btn b2" id="edok" type="button">Aplicar</button><button class="btn b3" id="edno" type="button">Cancelar</button></div></dialog>
+<dialog id="dlg"><form method="dialog" onsubmit="return false"><h3 style="color:var(--gold)">Acceso privado</h3><input id="pw" type="password" placeholder="Contraseña" autocomplete="off"><div id="dm" style="color:#b3261e;min-height:1.4em"></div><a href="#" id="fg" style="color:var(--gold);font-size:.85rem">¿Olvidaste tu contraseña?</a><div id="rcv" hidden><input id="rc" placeholder="Código de recuperación" autocomplete="off"><input id="np" type="password" placeholder="Nueva contraseña (mín. 8 caracteres)" autocomplete="new-password"><button class="btn b2" id="rcb" type="button" style="margin-top:6px">Restablecer</button></div><div class="btns" style="margin-top:6px"><button class="btn b2" id="go" type="button">Entrar</button><button class="btn b3" id="cn" type="button">Cerrar</button></div></form></dialog>
+
+<script>
+const DEF={"about":"Maquilladora profesional certificada en Maquillaje Básico (230 horas). En Studio Paredes cada servicio está pensado para que te veas y te sientas increíble, con productos de calidad y un trato cálido, en la comodidad de tu hogar.","phrases":["Tu belleza no se crea, se realza.","Cada mujer merece sentirse hermosa en su propia piel.","Brilla con luz propia, como un girasol.","Tú eres el lienzo; yo solo resalto tu arte.","La confianza es el mejor maquillaje."],"services":[{"n":"Maquillaje","d":"Social, de novia, quinceañera y ocasiones especiales.","p":""},{"n":"Pestañas","d":"Realce tu mirada con un acabado natural o glamoroso.","p":""},{"n":"Cejas","d":"Diseño y perfilado que enmarcan tu rostro.","p":""},{"n":"Facial","d":"Cuidado de la piel para un glow radiante.","p":""}],"home":{"t":"Voy donde tú estés. Te atiendo en tu casa, con todo el equipo y la comodidad que mereces.","c":"Costo adicional según la zona. Consulta por WhatsApp."}};
+const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
+const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const WA='https://wa.me/18293690116',IG='https://www.instagram.com/studio.paredes17?vrfl=bmVvcDIwYmk4dnF5',CATS={mak:'Maquillaje',pes:'Pestañas'};
+
+const API_BASE='https://tpohwxixhwebarnhmfip.supabase.co/functions/v1/studio-api';
+const endpoint=p=>`${API_BASE}/${String(p).replace(/^\/+/,'')}`;
+
+const norm=d=>{d.gal=d.gal||{mak:d.gallery||[],pes:[]};delete d.gallery;delete d.slots;delete d.clients;d.offers=d.offers||[];d.stats=d.stats||[];d.photo=d.photo||null;d.brand=d.brand||null;d.certs=d.certs||[{t:'Maquillaje Básico',i:'Escuela Laboral · Ministerio de Educación, Rep. Dominicana',d:'230 horas · 2024'}];return d};
+let S=norm(JSON.parse(JSON.stringify(DEF))),T=sessionStorage.getItem('tk')||'',pi=0,DEL=[],RV=[],RA=[],sv=false,cid=0,ct=0,stars=0,NEWC='',AI={};
+const wa=t=>WA+'?text='+encodeURIComponent(t);
+['waTop','waBot','waFab','waFt'].forEach(i=>$('#'+i).href=wa('Hola Isabel, quiero agendar una cita'));['igTop','igBot','igFt'].forEach(i=>$('#'+i).href=IG);
+$('#yr').textContent=new Date().getFullYear();$('#bd').min=new Date().toISOString().slice(0,10);
+
+const pu=id=>endpoint('photo/'+encodeURIComponent(id));
+const isAd=()=>document.body.classList.contains('on');
+
+const live=o=>!o.end||new Date(o.end)>Date.now();
+const left=o=>{const m=new Date(o.end)-Date.now(),d=Math.floor(m/864e5),h=Math.floor(m%864e5/36e5),n=Math.floor(m%36e5/6e4);return d>0?d+' d '+h+' h':h>0?h+' h '+n+' min':n+' min'};
+const loc=iso=>{if(!iso)return'';const d=new Date(iso);return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,16)};
+
+async function api(p,o={}){
+  const headers={
+    ...(o.headers||{}),
+    'x-token':T
+  };
+
+  if(typeof o.body==='string'&&!headers['content-type']){
+    headers['content-type']='application/json';
+  }
+
+  const r=await fetch(endpoint(p),{
+    ...o,
+    headers
+  });
+
+  if(!r.ok){
+    const e=await r.json().catch(()=>({}));
+    if(r.status===401){
+      T='';
+      sessionStorage.removeItem('tk');
+    }
+    throw new Error(e.error||('Error '+r.status));
+  }
+
+  return r;
+}
+
+function offers(){const ad=isAd(),L=S.offers.map((o,i)=>[o,i]).filter(([o])=>ad||live(o));
+  $('#ofertas').hidden=$('#navOf').hidden=!L.length;
+  $('#off').innerHTML=L.map(([o,i])=>`<div class="card off"><span class="tag">${live(o)?'OFERTA':'VENCIDA'}</span><h3>${esc(o.t)}</h3><p>${esc(o.d)}</p><div class="cd">${o.end?(live(o)?'Termina en '+left(o):'Esta oferta terminó'):'Oferta activa'}</div><a href="${wa('Hola Isabel, quiero aprovechar la oferta: '+o.t)}" target="_blank" rel="noopener">Aprovechar →</a>${ad?`<button class="x" onclick="rm('offers',${i})">×</button>`:''}</div>`).join('')}
+function gals(){const ad=isAd();let any=0;
+  for(const k in CATS){const it=S.gal[k];any+=it.length;
+    $('#gal-'+k).innerHTML=it.map((g,i)=>`<div class="t"><img src="${pu(g.id)}" data-lb="${pu(g.id)}" alt="${CATS[k]} por Isabel Paredes" loading="lazy">${ad?`<button class="x" onclick="rmp('${k}',${i})">×</button><button class="x" style="right:42px;background:#a9780f" onclick="editImg('${k}',${i})">✎</button>`:''}</div>`).join('');
+    $('#gt-'+k).hidden=$('#gal-'+k).hidden=!it.length}
+  $('#cats').innerHTML=Object.keys(CATS).filter(k=>S.gal[k].length).map(k=>`<a class="cat" href="#gt-${k}"><img src="${pu(S.gal[k][0].id)}" alt="${CATS[k]}" loading="lazy"><span>${CATS[k]}</span></a>`).join('');
+  $('#galeria').hidden=$('#navG').hidden=!any}
+function revs(){$('#rv').innerHTML=RV.map(r=>`<div class="card cl"><div class="st5">${'★'.repeat(r.r)}${'☆'.repeat(5-r.r)}</div>“${esc(r.t)}”<b>— ${esc(r.n)}</b></div>`).join('');
+  $('#rvl').textContent=RV.length?'Opiniones de quienes ya confiaron en Studio Paredes':'Sé la primera en dejar tu reseña'}
+const sun=z=>{let p='';for(let i=0;i<18;i++)p+=`<ellipse cx="100" cy="40" rx="12" ry="38" fill="${i%2?'#f2b705':'#ffd75e'}" transform="rotate(${i*20} 100 100)"/>`;return `<svg viewBox="0 0 200 200" width="${z}" height="${z}" aria-hidden="true">${p}<circle cx="100" cy="100" r="30" fill="#6b3f12"/><circle cx="100" cy="100" r="21" fill="#4a2a0a"/></svg>`};
+function render(){
+  $('#about').textContent=S.about;$('#phw').hidden=!S.photo;if(S.photo)$('#ph').src=pu(S.photo.id);
+  $('#svc').innerHTML=S.services.map((s,i)=>`<div class="card"><span class="no">${String(i+1).padStart(2,'0')}</span><h3>${esc(s.n)}</h3><p>${esc(s.d)}</p><div class="price">${s.p?esc(s.p):'Consultar precio'}</div><a href="${wa('Hola Isabel, me interesa el servicio de '+s.n)}" target="_blank" rel="noopener">Reservar →</a></div>`).join('');
+  $('#homeT').textContent=S.home.t;$('#homeC').textContent=S.home.c;
+  const v=$('#bs').value;$('#bs').innerHTML=S.services.map(s=>`<option>${esc(s.n)}</option>`).join('');if(v)$('#bs').value=v;
+  const PP=S.services.map((v,i)=>[v,i]).filter(([v])=>v.m);$('#pop').hidden=!PP.length;
+  $('#pp').innerHTML=PP.map(([v])=>`<div class="card"><span class="tag">MÁS SOLICITADO</span><h3>${esc(v.n)}</h3><p>${esc(v.d)}</p><div class="price">${v.p?esc(v.p):'Consultar precio'}</div><a href="${wa('Hola Isabel, me interesa el servicio de '+v.n)}" target="_blank" rel="noopener">Reservar →</a></div>`).join('');
+  const bi=S.brand?S.brand.id:S.photo?S.photo.id:(S.gal.mak[0]||S.gal.pes[0]||{}).id;$('#bf').innerHTML=bi?`<img src="${pu(bi)}" alt="Isabel Paredes" loading="lazy">`:sun(320);
+  offers();gals();revs();
+  $('#certificaciones').hidden=!S.certs.length;
+  $('#ct').innerHTML=S.certs.map(c=>`<div class="card ct">${c.img?`<img src="${pu(c.img)}" data-lb="${pu(c.img)}" alt="Certificado ${esc(c.t)}">`:'<div class="ci">✦</div>'}<h3>${esc(c.t)}</h3><p>${esc(c.i)}</p><small>${esc(c.d)}</small></div>`).join('');
+  const ST=S.stats.filter(s=>+s.n>0);$('#stats').hidden=!ST.length;
+  $('#sg').innerHTML=ST.map(s=>`<div class="stat"><b data-n="${+s.n}" data-s="${esc(s.s||'')}">0${esc(s.s||'')}</b><span>${esc(s.l)}</span></div>`).join('');clearTimeout(ct);ct=setTimeout(()=>{if(sv)count()},350)}
+function count(){const id=++cid,t0=performance.now(),red=matchMedia('(prefers-reduced-motion:reduce)').matches;$$('[data-n]').forEach(e=>{const n=+e.dataset.n,s=e.dataset.s||'';(function f(t){if(id!==cid)return;const p=red?1:Math.min(1,(t-t0)/2400);e.textContent=Math.round(n*(1-Math.pow(1-p,3))).toLocaleString('es')+s;if(p<1)requestAnimationFrame(f)})(t0)})}
+new IntersectionObserver(es=>es.forEach(e=>{sv=e.isIntersecting;if(sv)count();else{cid++;$$('[data-n]').forEach(z=>z.textContent='0'+(z.dataset.s||''))}}),{threshold:.3}).observe($('#stats'));
+function tick(){const p=S.phrases;if(!p.length)return;const e=$('#phrase');e.style.opacity=0;setTimeout(()=>{e.textContent=p[pi++%p.length];e.style.opacity=1},400)}
+render();tick();setInterval(tick,6500);setInterval(offers,30000);
+
+fetch(endpoint('content')).then(r=>r.json()).then(d=>{if(d&&d.services){S=norm(d);render()}}).catch(()=>{}).finally(()=>fx2());
+fetch(endpoint('reviews')).then(r=>r.json()).then(a=>{RV=a;revs()}).catch(()=>revs()).finally(()=>fx2());
+
+document.addEventListener('click',e=>{const i=e.target.closest('[data-lb]');if(i){$('#lb img').src=i.dataset.lb;$('#lb').hidden=false}});$('#lb').onclick=()=>$('#lb').hidden=true;
+$('#bk').onsubmit=e=>{e.preventDefault();const f=i=>$('#'+i).value.trim();
+  window.open(wa(`Hola Isabel, soy ${f('bn')}. Quiero reservar ${f('bs')} el ${f('bd').split('-').reverse().join('/')} a las ${f('bt')}, a domicilio en ${f('ba')}. ¿Tienes disponibilidad?`),'_blank')};
+$$('#stars button').forEach(b=>b.onclick=()=>{stars=+b.dataset.r;$$('#stars button').forEach(x=>x.classList.toggle('on',+x.dataset.r<=stars))});
+
+$('#rf').onsubmit=async e=>{
+  e.preventDefault();
+  if(!stars){$('#rmsg').textContent='Elige tus estrellas ★';return}
+  try{
+    const r=await fetch(endpoint('review'),{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({n:$('#rn').value,t:$('#rt').value,r:stars,hp:$('#hp').value})
+    });
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'No se pudo enviar');
+    $('#rf').reset();stars=0;$$('#stars button').forEach(x=>x.classList.remove('on'));$('#rmsg').textContent='¡Gracias! Tu reseña se publicará cuando Isabel la apruebe.'
+  }catch(x){$('#rmsg').textContent=x.message||'No se pudo enviar'}
+};
+
+(function(){const i=$('#intro');if(sessionStorage.getItem('in')||matchMedia('(prefers-reduced-motion:reduce)').matches){i.remove();return}
+  const out=()=>{i.classList.add('out');sessionStorage.setItem('in',1);setTimeout(()=>i.remove(),1300)};i.onclick=out;setTimeout(out,3400)})();
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+$$('section').forEach(s=>{s.classList.add('rv');io.observe(s)});
+
+async function open_(){document.body.classList.add('on');try{AI=await(await api('auth-info')).json()}catch(e){AI={}}await rvSync();render();$('#adm').scrollIntoView()}
+$('#lock').onclick=e=>{e.preventDefault();if(T)return open_();$('#pw').value='';$('#dm').textContent='';$('#dlg').showModal()};
+$('#cn').onclick=()=>$('#dlg').close();
+
+async function login(){
+  $('#dm').textContent='Verificando…';
+  try{
+    const r=await fetch(endpoint('login'),{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({password:$('#pw').value})
+    });
+    const d=await r.json();
+    if(!r.ok){$('#dm').textContent=d.error||'Error';return}
+    T=d.token;sessionStorage.setItem('tk',T);$('#dlg').close();open_()
+  }catch(e){$('#dm').textContent='Sin conexión'}
+}
+
+$('#go').onclick=login;$('#pw').onkeydown=e=>{if(e.key==='Enter')login()};
+function rm(k,i){if(k==='certs'&&S.certs[i].img)DEL.push(S.certs[i].img);S[k].splice(i,1);render();adm()}
+function rmp(k,i){const x=S.gal[k].splice(i,1)[0];if(x)DEL.push(x.id);render();adm()}
+function delImg(k,i){if(k==='p'){DEL.push(S.photo.id);S.photo=null}else if(k==='b'){DEL.push(S.brand.id);S.brand=null}else{DEL.push(S.certs[i].img);delete S.certs[i].img}render();adm()}
+function set(path,v){const p=path.split('.');let o=S;while(p.length>1)o=o[p.shift()];o[p[0]]=v;render()}
+function add(k,o){S[k].push(o);render();adm()}
+function dur(i,h){S.offers[i].end=h?new Date(Date.now()+h*36e5).toISOString():'';render();adm()}
+async function rvSync(){try{RA=await(await api('reviews?all=1')).json()}catch(e){RA=[]}RV=RA.filter(r=>r.show);revs();adm()}
+async function rvSet(id,show){await api('review/'+id,{method:'PATCH',body:JSON.stringify({show})});rvSync()}
+async function rvDel(id){await api('review/'+id,{method:'DELETE'});rvSync()}
+function adm(){
+  const fi=(k,i)=>`<input type="file" accept="image/*" ${k==='p'||k==='b'?'':'multiple'} onchange="up(this.files,'${k}',${i||0})">`;
+  $('#adm').innerHTML=`<h2>Panel de Isabel</h2><p style="text-align:center">Edita y pulsa «Publicar cambios» al final. Las reseñas se aprueban al instante, sin publicar.</p>
+  <h3>Mi foto (opcional)</h3>${S.photo?`<img src="${pu(S.photo.id)}" style="width:90px;height:90px;border-radius:50%;object-fit:cover"><br><button class="btn b3" onclick="delImg('p')">Quitar foto</button> <button class="btn b3" onclick="editImg('p')">Editar foto</button>`:'<p>Sin foto: la página se ve normal, sin ningún espacio.</p>'}${fi('p')}
+  <h3>Imagen de la presentación (sección Studio Paredes)</h3>${S.brand?`<img src="${pu(S.brand.id)}" style="width:90px;height:110px;border-radius:12px;object-fit:cover"><br><button class="btn b3" onclick="delImg('b')">Quitar imagen</button> <button class="btn b3" onclick="editImg('b')">Editar imagen</button>`:'<p>Sin imagen propia se muestra tu foto de perfil o, si no hay, el girasol. Sube una imagen vertical para cambiarlo.</p>'}${fi('b')}
+  <h3>Sobre mí</h3><textarea rows="4" oninput="set('about',this.value)">${esc(S.about)}</textarea>
+  <h3>Ofertas con tiempo limitado</h3>${S.offers.map((o,i)=>`<div class="oc"><input value="${esc(o.t)}" placeholder="Título (ej. 20% en pestañas)" oninput="S.offers[${i}].t=this.value;offers()"><input value="${esc(o.d)}" placeholder="Detalle" oninput="S.offers[${i}].d=this.value;offers()"><div class="dur">Dura: <button onclick="dur(${i},24)">24 h</button><button onclick="dur(${i},72)">3 días</button><button onclick="dur(${i},168)">7 días</button><button onclick="dur(${i},360)">15 días</button><button onclick="dur(${i},0)">Sin fin</button></div>Termina el: <input type="datetime-local" value="${loc(o.end)}" oninput="S.offers[${i}].end=this.value?new Date(this.value).toISOString():'';offers()"><button class="btn b3" onclick="rm('offers',${i})">Quitar oferta</button></div>`).join('')}
+  <button class="btn b3" onclick="add('offers',{t:'Nueva oferta',d:'Detalle de la oferta',end:new Date(Date.now()+6048e5).toISOString()})">+ Añadir oferta</button>
+  <h3>Frases para tus clientas</h3>${S.phrases.map((p,i)=>`<div class="row r2"><input value="${esc(p)}" oninput="S.phrases[${i}]=this.value"><button class="x" onclick="rm('phrases',${i})">×</button></div>`).join('')}
+  <button class="btn b3" onclick="add('phrases','Nueva frase de motivación')">+ Añadir frase</button>
+  <h3>Servicios y precios</h3>${S.services.map((s,i)=>`<div class="oc"><div class="row"><input value="${esc(s.n)}" placeholder="Servicio" oninput="S.services[${i}].n=this.value;render()"><input value="${esc(s.d)}" placeholder="Descripción" oninput="S.services[${i}].d=this.value;render()"><input value="${esc(s.p)}" placeholder="Precio (RD$)" oninput="S.services[${i}].p=this.value;render()"><button class="x" onclick="rm('services',${i})">×</button></div><label><input type="checkbox" style="width:auto" ${s.m?'checked':''} onchange="S.services[${i}].m=this.checked;render()"> Más solicitado</label></div>`).join('')}
+  <button class="btn b3" onclick="add('services',{n:'Nuevo servicio',d:'Descripción',p:''})">+ Añadir servicio</button>
+  <h3>Servicio a domicilio</h3><input value="${esc(S.home.t)}" oninput="set('home.t',this.value)"><input value="${esc(S.home.c)}" placeholder="Costo adicional" oninput="set('home.c',this.value)">
+  <h3>Fotos de maquillaje</h3>${fi('mak')}<h3>Fotos de pestañas</h3>${fi('pes')}<p>Solo aparecen las fotos que subas. Para quitar una, pulsa la × sobre ella.</p>
+  <h3>Certificaciones</h3>${S.certs.map((c,i)=>`<div class="oc"><input value="${esc(c.t)}" placeholder="Título del curso" oninput="S.certs[${i}].t=this.value;render()"><input value="${esc(c.i)}" placeholder="Institución" oninput="S.certs[${i}].i=this.value;render()"><input value="${esc(c.d)}" placeholder="Detalle (año, horas)" oninput="S.certs[${i}].d=this.value;render()">${fi('c',i)}${c.img?`<button class="btn b3" onclick="delImg('c',${i})">Quitar foto</button><button class="btn b3" onclick="editImg('c',${i})">Editar foto</button>`:''}<button class="btn b3" onclick="rm('certs',${i})">Quitar certificación</button></div>`).join('')}
+  <button class="btn b3" onclick="add('certs',{t:'Nueva certificación',i:'Institución',d:'Año · horas'})">+ Añadir certificación</button>
+  <h3>Reseñas de clientas</h3>${RA.length?RA.map(r=>`<div class="oc"><b>${esc(r.n)}</b> ${'★'.repeat(r.r)} · ${r.show?'Visible':'Pendiente'}<p>${esc(r.t)}</p><button class="btn b3" onclick="rvSet('${r.id}',${!r.show})">${r.show?'Ocultar':'Mostrar'}</button><button class="btn b3" onclick="rvDel('${r.id}')">Eliminar</button></div>`).join(''):'<p>Aún no hay reseñas.</p>'}
+  <h3>Contador (clientas satisfechas, etc.)</h3>${S.stats.map((s,i)=>`<div class="row"><input value="${esc(s.l)}" placeholder="Texto" oninput="S.stats[${i}].l=this.value;render()"><input type="number" min="0" value="${+s.n||0}" oninput="S.stats[${i}].n=+this.value;render()"><input value="${esc(s.s||'')}" placeholder="+" maxlength="2" oninput="S.stats[${i}].s=this.value;render()"><button class="x" onclick="rm('stats',${i})">×</button></div>`).join('')}
+  <button class="btn b3" onclick="add('stats',{l:'Clientas satisfechas',n:0,s:'+'})">+ Añadir contador</button><p>Aparece al final de la página cuando el número es mayor que 0.</p>
+  <h3>Seguridad</h3><p>${AI.hasOwn?'Ya tienes contraseña propia.':'Ahora entras con la contraseña inicial del sitio. Crea la tuya aquí.'}</p><input id="npw" type="password" placeholder="Nueva contraseña (mínimo 8 caracteres)" autocomplete="new-password"><button class="btn b3" onclick="chp()">Guardar contraseña</button>
+  <p>${AI.hasRecovery?'Ya tienes un código de recuperación (genera otro si lo perdiste).':'Aún no tienes código de recuperación.'}</p><button class="btn b3" onclick="gen()">Generar código de recuperación</button>${NEWC?`<div class="oc" style="border-color:var(--gold);margin-top:10px"><b style="font-size:1.4rem;letter-spacing:.1em">${esc(NEWC)}</b><p>Anótalo o toma una captura ahora: no se vuelve a mostrar. Con él puedes crear una contraseña nueva si olvidas la tuya.</p></div>`:''}
+  <div id="msg"></div><div class="bar"><button class="btn b2" onclick="save()">Publicar cambios</button><button class="btn b3" style="background:var(--sf)" onclick="out()">Salir</button></div>`}
+const msg=t=>{const m=$('#msg');if(m)m.textContent=t};
+function out(){T='';sessionStorage.removeItem('tk');document.body.classList.remove('on');render()}
+async function shrink(f){const b=await createImageBitmap(f),k=Math.min(1,1600/Math.max(b.width,b.height)),c=document.createElement('canvas');
+  c.width=Math.round(b.width*k);c.height=Math.round(b.height*k);c.getContext('2d').drawImage(b,0,0,c.width,c.height);return new Promise(r=>c.toBlob(r,'image/jpeg',.85))}
+const ASP={mak:.8,pes:.8,p:1,b:.8,c:1.3333};
+const smn=(iw,ih,W,H,a)=>{const c=Math.cos(a),s=Math.sin(a);let m=0;for(const[x,y]of[[1,1],[1,-1],[-1,1],[-1,-1]]){const px=x*W/2,py=y*H/2;m=Math.max(m,2*Math.abs(px*c+py*s)/iw,2*Math.abs(-px*s+py*c)/ih)}return m};
+const cov=(iw,ih,W,H,a,ox,oy,sc)=>{const c=Math.cos(a),s=Math.sin(a);for(const[x,y]of[[1,1],[1,-1],[-1,1],[-1,-1]]){const px=x*W/2-ox,py=y*H/2-oy;if(Math.abs(px*c+py*s)>iw*sc/2+.01||Math.abs(-px*s+py*c)>ih*sc/2+.01)return false}return true};
+function ed(src,asp){return new Promise(async res=>{
+  const d=$('#ed'),cv=$('#edc');let im;
+  try{im=await createImageBitmap(src instanceof Blob?src:await(await fetch(src)).blob())}catch(e){return res(null)}
+  const iw=im.width,ih=im.height,W=Math.min(340,innerWidth-80),H=Math.round(W/asp);cv.width=W;cv.height=H;cv.style.width=W+'px';cv.style.height=H+'px';
+  let r90=0,fine=0,z=1,ox=0,oy=0,done=false,dr=null;$('#eda').value=0;$('#edz').value=1;
+  const A=()=>(r90+fine)*Math.PI/180,S_=()=>smn(iw,ih,W,H,A())*z;
+  const fix=()=>{let n=0;while(!cov(iw,ih,W,H,A(),ox,oy,S_())&&n++<40){ox*=.85;oy*=.85}};
+  const paint=(c,w,h,k)=>{c.clearRect(0,0,w,h);c.save();c.translate((W/2+ox)*k,(H/2+oy)*k);c.rotate(A());c.scale(S_()*k,S_()*k);c.drawImage(im,-iw/2,-ih/2);c.restore()};
+  const draw=()=>paint(cv.getContext('2d'),W,H,1);
+  const end=v=>{if(done)return;done=true;if(d.open)d.close();res(v)};
+  $('#eda').oninput=e=>{fine=+e.target.value;fix();draw()};$('#edz').oninput=e=>{z=+e.target.value;fix();draw()};
+  $('#edl').onclick=()=>{r90-=90;fix();draw()};$('#edr').onclick=()=>{r90+=90;fix();draw()};
+  cv.onpointerdown=e=>{dr=[e.clientX,e.clientY,ox,oy];cv.setPointerCapture(e.pointerId)};cv.onpointerup=()=>dr=null;
+  cv.onpointermove=e=>{if(!dr)return;const nx=dr[2]+e.clientX-dr[0],ny=dr[3]+e.clientY-dr[1];if(cov(iw,ih,W,H,A(),nx,oy,S_()))ox=nx;if(cov(iw,ih,W,H,A(),ox,ny,S_()))oy=ny;draw()};
+  $('#edno').onclick=()=>end(null);d.oncancel=()=>end(null);
+  $('#edok').onclick=()=>{const OW=1200,oc=document.createElement('canvas');oc.width=OW;oc.height=Math.round(OW/asp);paint(oc.getContext('2d'),oc.width,oc.height,OW/W);oc.toBlob(b=>end(b),'image/jpeg',.88)};
+  draw();d.showModal()})}
+function put(k,i,id){if(k==='p'){if(S.photo)DEL.push(S.photo.id);S.photo={id}}else if(k==='b'){if(S.brand)DEL.push(S.brand.id);S.brand={id}}else if(k==='c'){if(S.certs[i].img)DEL.push(S.certs[i].img);S.certs[i].img=id}else S.gal[k].push({id})}
+async function up(fs,k,i){
+  for(const f of fs){const bl=await ed(f,ASP[k]);if(!bl)continue;msg('Subiendo…');
+    try{const r=await api('upload',{method:'POST',headers:{'content-type':'image/jpeg'},body:bl});put(k,i,(await r.json()).id)}catch(e){msg('No se pudo subir: '+e.message);return}}
+  render();adm();msg('Listo. Pulsa «Publicar cambios».')}
+async function editImg(k,i){const cur=k==='p'?S.photo.id:k==='b'?S.brand.id:k==='c'?S.certs[i].img:S.gal[k][i].id;
+  const bl=await ed(pu(cur),ASP[k]);if(!bl)return;msg('Subiendo…');
+  try{const id=(await(await api('upload',{method:'POST',headers:{'content-type':'image/jpeg'},body:bl})).json()).id;DEL.push(cur);
+    if(k==='p')S.photo={id};else if(k==='b')S.brand={id};else if(k==='c')S.certs[i].img=id;else S.gal[k][i]={id};render();adm();msg('Listo. Pulsa «Publicar cambios».')}catch(e){msg('No se pudo subir: '+e.message)}}
+async function chp(){const v=$('#npw').value;if(v.length<8){msg('Mínimo 8 caracteres');return}try{await api('password',{method:'POST',body:JSON.stringify({password:v})});AI.hasOwn=true;adm();msg('Contraseña guardada. Desde ahora entras con ella.')}catch(e){msg(e.message)}}
+async function gen(){try{NEWC=(await(await api('recovery',{method:'POST'})).json()).code;AI.hasRecovery=true;adm();msg('Código generado. Anótalo ahora.')}catch(e){msg(e.message)}}
+$('#fg').onclick=e=>{e.preventDefault();$('#rcv').hidden=false};
+
+$('#rcb').onclick=async()=>{
+  $('#dm').textContent='Verificando…';
+  try{
+    const r=await fetch(endpoint('recover'),{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({code:$('#rc').value,password:$('#np').value})
+    });
+    const d=await r.json();
     if(!r.ok){$('#dm').textContent=d.error||'Error';return}
     T=d.token;sessionStorage.setItem('tk',T);NEWC=d.code;$('#dlg').close();open_()
   }catch(e){$('#dm').textContent='Sin conexión'}
