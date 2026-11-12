@@ -150,17 +150,50 @@ const DEF={"about":"Maquilladora profesional certificada en Maquillaje Básico (
 const $=s=>document.querySelector(s),$$=s=>document.querySelectorAll(s);
 const esc=t=>String(t==null?'':t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const WA='https://wa.me/18293690116',IG='https://www.instagram.com/studio.paredes17?vrfl=bmVvcDIwYmk4dnF5',CATS={mak:'Maquillaje',pes:'Pestañas'};
+
+const API_BASE='https://tpohwxixhwebarnhmfip.supabase.co/functions/v1/studio-api';
+const endpoint=p=>`${API_BASE}/${String(p).replace(/^\/+/,'')}`;
+
 const norm=d=>{d.gal=d.gal||{mak:d.gallery||[],pes:[]};delete d.gallery;delete d.slots;delete d.clients;d.offers=d.offers||[];d.stats=d.stats||[];d.photo=d.photo||null;d.brand=d.brand||null;d.certs=d.certs||[{t:'Maquillaje Básico',i:'Escuela Laboral · Ministerio de Educación, Rep. Dominicana',d:'230 horas · 2024'}];return d};
 let S=norm(JSON.parse(JSON.stringify(DEF))),T=sessionStorage.getItem('tk')||'',pi=0,DEL=[],RV=[],RA=[],sv=false,cid=0,ct=0,stars=0,NEWC='',AI={};
 const wa=t=>WA+'?text='+encodeURIComponent(t);
 ['waTop','waBot','waFab','waFt'].forEach(i=>$('#'+i).href=wa('Hola Isabel, quiero agendar una cita'));['igTop','igBot','igFt'].forEach(i=>$('#'+i).href=IG);
 $('#yr').textContent=new Date().getFullYear();$('#bd').min=new Date().toISOString().slice(0,10);
-const pu=id=>'/api/photo/'+encodeURIComponent(id),isAd=()=>document.body.classList.contains('on');
+
+const pu=id=>endpoint('photo/'+encodeURIComponent(id));
+const isAd=()=>document.body.classList.contains('on');
+
 const live=o=>!o.end||new Date(o.end)>Date.now();
 const left=o=>{const m=new Date(o.end)-Date.now(),d=Math.floor(m/864e5),h=Math.floor(m%864e5/36e5),n=Math.floor(m%36e5/6e4);return d>0?d+' d '+h+' h':h>0?h+' h '+n+' min':n+' min'};
 const loc=iso=>{if(!iso)return'';const d=new Date(iso);return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,16)};
-async function api(p,o={}){const r=await fetch('/api/'+p,{...o,headers:{...(o.headers||{}),'x-token':T}});
-  if(!r.ok){const e=await r.json().catch(()=>({}));if(r.status===401){T='';sessionStorage.removeItem('tk')}throw new Error(e.error||('Error '+r.status))}return r}
+
+async function api(p,o={}){
+  const headers={
+    ...(o.headers||{}),
+    'x-token':T
+  };
+
+  if(typeof o.body==='string'&&!headers['content-type']){
+    headers['content-type']='application/json';
+  }
+
+  const r=await fetch(endpoint(p),{
+    ...o,
+    headers
+  });
+
+  if(!r.ok){
+    const e=await r.json().catch(()=>({}));
+    if(r.status===401){
+      T='';
+      sessionStorage.removeItem('tk');
+    }
+    throw new Error(e.error||('Error '+r.status));
+  }
+
+  return r;
+}
+
 function offers(){const ad=isAd(),L=S.offers.map((o,i)=>[o,i]).filter(([o])=>ad||live(o));
   $('#ofertas').hidden=$('#navOf').hidden=!L.length;
   $('#off').innerHTML=L.map(([o,i])=>`<div class="card off"><span class="tag">${live(o)?'OFERTA':'VENCIDA'}</span><h3>${esc(o.t)}</h3><p>${esc(o.d)}</p><div class="cd">${o.end?(live(o)?'Termina en '+left(o):'Esta oferta terminó'):'Oferta activa'}</div><a href="${wa('Hola Isabel, quiero aprovechar la oferta: '+o.t)}" target="_blank" rel="noopener">Aprovechar →</a>${ad?`<button class="x" onclick="rm('offers',${i})">×</button>`:''}</div>`).join('')}
@@ -190,15 +223,30 @@ function count(){const id=++cid,t0=performance.now(),red=matchMedia('(prefers-re
 new IntersectionObserver(es=>es.forEach(e=>{sv=e.isIntersecting;if(sv)count();else{cid++;$$('[data-n]').forEach(z=>z.textContent='0'+(z.dataset.s||''))}}),{threshold:.3}).observe($('#stats'));
 function tick(){const p=S.phrases;if(!p.length)return;const e=$('#phrase');e.style.opacity=0;setTimeout(()=>{e.textContent=p[pi++%p.length];e.style.opacity=1},400)}
 render();tick();setInterval(tick,6500);setInterval(offers,30000);
-fetch('/api/content').then(r=>r.json()).then(d=>{if(d&&d.services){S=norm(d);render()}}).catch(()=>{}).finally(()=>fx2());
-fetch('/api/reviews').then(r=>r.json()).then(a=>{RV=a;revs()}).catch(()=>revs()).finally(()=>fx2());
+
+fetch(endpoint('content')).then(r=>r.json()).then(d=>{if(d&&d.services){S=norm(d);render()}}).catch(()=>{}).finally(()=>fx2());
+fetch(endpoint('reviews')).then(r=>r.json()).then(a=>{RV=a;revs()}).catch(()=>revs()).finally(()=>fx2());
+
 document.addEventListener('click',e=>{const i=e.target.closest('[data-lb]');if(i){$('#lb img').src=i.dataset.lb;$('#lb').hidden=false}});$('#lb').onclick=()=>$('#lb').hidden=true;
 $('#bk').onsubmit=e=>{e.preventDefault();const f=i=>$('#'+i).value.trim();
   window.open(wa(`Hola Isabel, soy ${f('bn')}. Quiero reservar ${f('bs')} el ${f('bd').split('-').reverse().join('/')} a las ${f('bt')}, a domicilio en ${f('ba')}. ¿Tienes disponibilidad?`),'_blank')};
 $$('#stars button').forEach(b=>b.onclick=()=>{stars=+b.dataset.r;$$('#stars button').forEach(x=>x.classList.toggle('on',+x.dataset.r<=stars))});
-$('#rf').onsubmit=async e=>{e.preventDefault();if(!stars){$('#rmsg').textContent='Elige tus estrellas ★';return}
-  try{const r=await fetch('/api/review',{method:'POST',body:JSON.stringify({n:$('#rn').value,t:$('#rt').value,r:stars,hp:$('#hp').value})});const d=await r.json();if(!r.ok)throw new Error(d.error);
-    $('#rf').reset();stars=0;$$('#stars button').forEach(x=>x.classList.remove('on'));$('#rmsg').textContent='¡Gracias! Tu reseña se publicará cuando Isabel la apruebe.'}catch(x){$('#rmsg').textContent=x.message||'No se pudo enviar'}};
+
+$('#rf').onsubmit=async e=>{
+  e.preventDefault();
+  if(!stars){$('#rmsg').textContent='Elige tus estrellas ★';return}
+  try{
+    const r=await fetch(endpoint('review'),{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({n:$('#rn').value,t:$('#rt').value,r:stars,hp:$('#hp').value})
+    });
+    const d=await r.json();
+    if(!r.ok)throw new Error(d.error||'No se pudo enviar');
+    $('#rf').reset();stars=0;$$('#stars button').forEach(x=>x.classList.remove('on'));$('#rmsg').textContent='¡Gracias! Tu reseña se publicará cuando Isabel la apruebe.'
+  }catch(x){$('#rmsg').textContent=x.message||'No se pudo enviar'}
+};
+
 (function(){const i=$('#intro');if(sessionStorage.getItem('in')||matchMedia('(prefers-reduced-motion:reduce)').matches){i.remove();return}
   const out=()=>{i.classList.add('out');sessionStorage.setItem('in',1);setTimeout(()=>i.remove(),1300)};i.onclick=out;setTimeout(out,3400)})();
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
@@ -207,9 +255,21 @@ $$('section').forEach(s=>{s.classList.add('rv');io.observe(s)});
 async function open_(){document.body.classList.add('on');try{AI=await(await api('auth-info')).json()}catch(e){AI={}}await rvSync();render();$('#adm').scrollIntoView()}
 $('#lock').onclick=e=>{e.preventDefault();if(T)return open_();$('#pw').value='';$('#dm').textContent='';$('#dlg').showModal()};
 $('#cn').onclick=()=>$('#dlg').close();
-async function login(){$('#dm').textContent='Verificando…';
-  try{const r=await fetch('/api/login',{method:'POST',body:JSON.stringify({password:$('#pw').value})});const d=await r.json();
-    if(!r.ok){$('#dm').textContent=d.error||'Error';return}T=d.token;sessionStorage.setItem('tk',T);$('#dlg').close();open_()}catch(e){$('#dm').textContent='Sin conexión'}}
+
+async function login(){
+  $('#dm').textContent='Verificando…';
+  try{
+    const r=await fetch(endpoint('login'),{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({password:$('#pw').value})
+    });
+    const d=await r.json();
+    if(!r.ok){$('#dm').textContent=d.error||'Error';return}
+    T=d.token;sessionStorage.setItem('tk',T);$('#dlg').close();open_()
+  }catch(e){$('#dm').textContent='Sin conexión'}
+}
+
 $('#go').onclick=login;$('#pw').onkeydown=e=>{if(e.key==='Enter')login()};
 function rm(k,i){if(k==='certs'&&S.certs[i].img)DEL.push(S.certs[i].img);S[k].splice(i,1);render();adm()}
 function rmp(k,i){const x=S.gal[k].splice(i,1)[0];if(x)DEL.push(x.id);render();adm()}
@@ -278,7 +338,21 @@ async function editImg(k,i){const cur=k==='p'?S.photo.id:k==='b'?S.brand.id:k===
 async function chp(){const v=$('#npw').value;if(v.length<8){msg('Mínimo 8 caracteres');return}try{await api('password',{method:'POST',body:JSON.stringify({password:v})});AI.hasOwn=true;adm();msg('Contraseña guardada. Desde ahora entras con ella.')}catch(e){msg(e.message)}}
 async function gen(){try{NEWC=(await(await api('recovery',{method:'POST'})).json()).code;AI.hasRecovery=true;adm();msg('Código generado. Anótalo ahora.')}catch(e){msg(e.message)}}
 $('#fg').onclick=e=>{e.preventDefault();$('#rcv').hidden=false};
-$('#rcb').onclick=async()=>{$('#dm').textContent='Verificando…';try{const r=await fetch('/api/recover',{method:'POST',body:JSON.stringify({code:$('#rc').value,password:$('#np').value})});const d=await r.json();if(!r.ok){$('#dm').textContent=d.error||'Error';return}T=d.token;sessionStorage.setItem('tk',T);NEWC=d.code;$('#dlg').close();open_()}catch(e){$('#dm').textContent='Sin conexión'}};
+
+$('#rcb').onclick=async()=>{
+  $('#dm').textContent='Verificando…';
+  try{
+    const r=await fetch(endpoint('recover'),{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({code:$('#rc').value,password:$('#np').value})
+    });
+    const d=await r.json();
+    if(!r.ok){$('#dm').textContent=d.error||'Error';return}
+    T=d.token;sessionStorage.setItem('tk',T);NEWC=d.code;$('#dlg').close();open_()
+  }catch(e){$('#dm').textContent='Sin conexión'}
+};
+
 function fx2(){if(!(window.gsap&&window.ScrollTrigger)||isAd()||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
   $$('#svc .card,#pp .card,.gal .t,#ct .card,#rv .card,.cat').forEach(el=>{if(el._a)return;el._a=1;gsap.from(el,{y:50,scale:.93,opacity:0,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 90%',once:true}})});ScrollTrigger.refresh()}
 [['#servicios','left:-80px;top:30px',210,1],['#sobre','right:-90px;bottom:0',260,-1.2],['#resenas','left:-60px;top:50px',190,.8],['#galeria','right:-70px;top:20px',200,-.9]].forEach(([q,st,z,sp])=>{const d=document.createElement('div');d.className='df';d.dataset.sp=sp;d.style.cssText=st;d.innerHTML=sun(z);$(q).appendChild(d)});
@@ -306,7 +380,6 @@ const rad=(x,st)=>{const g=x.createRadialGradient(64,64,0,64,64,64);st.forEach((
 const cloudT=tex(x=>rad(x,[[0,'rgba(255,250,232,.95)'],[.5,'rgba(255,226,140,.45)'],[1,'rgba(255,226,140,0)']]));
 const dotT=tex(x=>rad(x,[[0,'#fff'],[.3,'rgba(255,255,255,.6)'],[1,'rgba(255,255,255,0)']]));
 const starT=tex(x=>{x.translate(64,64);x.fillStyle='#fff';x.beginPath();for(let i=0;i<8;i++){const a=i*Math.PI/4,r=i%2?7:62;x.lineTo(Math.cos(a)*r,Math.sin(a)*r)}x.closePath();x.fill()});
-// reflejos: entorno con paneles de luz
 const es=new Th.Scene();es.add(new Th.Mesh(new Th.SphereGeometry(20,16,16),new Th.MeshBasicMaterial({color:0xffeeb8,side:Th.BackSide})));
 [[0xffffff,0,10,8],[0xffd98a,-10,4,0],[0xfff0c0,10,6,-4],[0xffffff,0,14,-6]].forEach(([c,x,y,z])=>{const m=new Th.Mesh(new Th.PlaneGeometry(10,6),new Th.MeshBasicMaterial({color:new Th.Color(c).multiplyScalar(4),side:Th.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);es.add(m)});
 sc.environment=new Th.PMREMGenerator(R).fromScene(es,.03).texture;
@@ -316,21 +389,18 @@ const M=(c,m=.3,r=.4,o={})=>new Th.MeshStandardMaterial({color:c,metalness:m,rou
 const gold=M(0xd9ae55,1,.2),rose=M(0xe9c97a,1,.28),marble=M(0xfff6f1,.1,.22),blk=M(0x1c1416,.6,.22),mirror=M(0xffffff,1,.03);
 const mesh=(g,m,x=0,y=0,z=0)=>{const o=new Th.Mesh(g,m);o.position.set(x,y,z);return o};
 const Cy=(a,b,h,s=24)=>new Th.CylinderGeometry(a,b,h,s),Bx=(w,h,d)=>new Th.BoxGeometry(w,h,d);
-// productos (origen en la base)
 const lip=c=>{const g=new Th.Group();g.add(mesh(Cy(.1,.1,.26),gold,0,.13,0),mesh(Cy(.094,.094,.28),blk,0,.4,0),mesh(Cy(.07,.07,.3),M(c,.2,.25),0,.69,0));const cap=mesh(new Th.SphereGeometry(.07,16,10,0,6.283,0,1.5708),M(c,.2,.25),0,.84,0);cap.scale.y=.8;g.add(cap);g.scale.setScalar(.85);return g};
 const pal=c=>{const g=new Th.Group();g.add(mesh(Bx(.95,.07,.7),M(c,1,.3),0,.035,0));[0xf6d77a,0xe5b93c,0xc99a2e,0xe8c39b,0xb98a4a,0xfbe9b8].forEach((k,i)=>g.add(mesh(Cy(.11,.11,.03,20),M(k,.3,.35),(i%3-1)*.28,.08,(Math.floor(i/3)-.5)*.3)));return g};
 const comp=()=>{const g=new Th.Group();g.add(mesh(Cy(.38,.38,.1,36),gold,0,.05,0),mesh(Cy(.31,.31,.012,36),mirror,0,.106,0));return g};
 const bot=()=>{const g=new Th.Group();g.add(mesh(Bx(.34,.5,.2),M(0xffe29a,.1,.05,{transparent:true,opacity:.65}),0,.25,0),mesh(Cy(.07,.07,.14),gold,0,.57,0));return g};
 const fnd=c=>{const g=new Th.Group();g.add(mesh(Cy(.13,.13,.5,24),M(c,.1,.08,{transparent:true,opacity:.85}),0,.25,0),mesh(Cy(.06,.06,.18),gold,0,.59,0),mesh(Cy(.03,.03,.1),gold,0,.73,0));return g};
 const brush=()=>{const g=new Th.Group();g.add(mesh(Cy(.03,.05,.8),rose,0,.4,0),mesh(Cy(.05,.05,.18),gold,0,.88,0),mesh(Cy(.01,.07,.26),M(0xf8ece6,0,.9),0,1.1,0));g.scale.setScalar(.8);return g};
-// tocador
 const van=new Th.Group();sc.add(van);
 van.add(mesh(Bx(4.4,.18,1.7),marble,0,-.09,0),mesh(Bx(4.2,.5,1.5),M(0xfff0cf,.1,.5),0,-.43,0));
 [[-2,-.7],[2,-.7],[-2,.7],[2,.7]].forEach(([x,z])=>van.add(mesh(Cy(.06,.1,2,12),gold,x,-1.2,z)));
 [-.9,.9].forEach(x=>van.add(mesh(Cy(.05,.05,.3,10),gold,x,-.43,.77)).rotation&&0);
 const mg=new Th.Group();mg.position.set(0,2.5,-.75);mg.scale.set(1.25,1.7,1);mg.add(mesh(new Th.CircleGeometry(.95,48),mirror),mesh(new Th.TorusGeometry(1,.07,16,64),gold));van.add(mg);
 van.add(mesh(Cy(.05,.07,.8,12),gold,0,1.1,-.75));
-// estuche
 const cs=new Th.Group();cs.position.set(0,0,.25);van.add(cs);
 cs.add(mesh(Bx(1.5,.28,1),M(0xfff0d0,.1,.45),0,.14,0),mesh(Bx(1.54,.04,1.04),gold,0,.2,0),mesh(Bx(1.34,.04,.84),M(0x8a6420,.2,.7),0,.29,0));
 const inn=new Th.Group();inn.position.y=.31;cs.add(inn);
@@ -338,26 +408,20 @@ const inn=new Th.Group();inn.position.y=.31;cs.add(inn);
 [[.3,-.15,0xf6d77a],[.55,-.15,0xe5b93c],[.3,.15,0xc99a2e],[.55,.15,0xe8c39b]].forEach(([x,z,c])=>inn.add(mesh(Cy(.1,.1,.03,20),M(c,.3,.35),x,.02,z)));
 const lidP=new Th.Group();lidP.position.set(0,.32,-.5);cs.add(lidP);
 lidP.add(mesh(Bx(1.5,.12,1),M(0xfff0d0,.1,.45),0,.06,.5),mesh(Bx(1.54,.03,1.04),gold,0,.01,.5));const lm=mesh(new Th.PlaneGeometry(1.3,.8),mirror,0,-.001,.5);lm.rotation.x=Math.PI/2;lidP.add(lm);
-// objetos flotantes
 const IT=[[lip(0xb3123f),-1.8,.09,.1],[lip(0xe0446a),-1.5,.09,.5],[fnd(0xe8c39b),-1.25,.09,-.3],[fnd(0xd9a877),1.25,.09,-.3],[lip(0xf07f9a),1.5,.09,.5],[lip(0xb3123f),1.8,.09,.1],[pal(0xd9ae55),-1.4,.1,-.5],[pal(0xf0d98a),1.4,.1,-.5],[comp(),-.8,.1,-.55],[comp(),.8,.1,-.55],[bot(),1,.09,.65],[brush(),-1,.09,.7]].map(([g,x,y,z],i)=>{sc.add(g);return{g,b:V(x,y,z),i}});
 function V(x,y,z){return new Th.Vector3(x,y,z)}
 const floor=mesh(new Th.CircleGeometry(18,64),M(0xfbe6a8,.7,.2),0,-2.2,0);floor.rotation.x=-Math.PI/2;sc.add(floor);
-// nubes
 const clouds=Array.from({length:mob?10:16},(_,i)=>{const s=new Th.Sprite(new Th.SpriteMaterial({map:cloudT,transparent:true,depthWrite:false}));const x=(Math.random()-.5)*18,y=Math.random()*7-4,z=Math.random()*9-6;s.userData={x,y,z,o:.55+Math.random()*.4,sz:5+Math.random()*4,ph:Math.random()*6};s.position.set(x,y,z);s.scale.set(s.userData.sz,s.userData.sz*.6,1);sc.add(s);return s});
-// pétalos
 const psh=new Th.Shape();psh.moveTo(0,0);psh.bezierCurveTo(.12,.08,.16,.34,0,.55);psh.bezierCurveTo(-.16,.34,-.12,.08,0,0);
 const pg=new Th.ShapeGeometry(psh),pm=[0xffc928,0xf7b500,0xffd95a,0xe8a317].map(c=>new Th.MeshStandardMaterial({color:c,side:Th.DoubleSide,roughness:.5}));
 const petals=Array.from({length:mob?36:64},()=>{const m=new Th.Mesh(pg,pm[Math.random()*4|0]);m.scale.setScalar(.7+Math.random()*.9);m.position.set((Math.random()-.5)*16,Math.random()*10-3,Math.random()*9-5);m.userData={v:.2+Math.random()*.35,s:Math.random()*2+.5,ph:Math.random()*6.28};m.rotation.set(Math.random()*6,Math.random()*6,Math.random()*6);sc.add(m);return m});
-// girasoles decorativos
 const heads=Array.from({length:mob?3:5},(_,i)=>{const g=new Th.Group(),c=mesh(Cy(.26,.26,.07,24),M(0x5a3510,.1,.8));c.rotation.x=Math.PI/2;g.add(c);
   for(let j=0;j<14;j++){const pv=new Th.Group(),p=new Th.Mesh(pg,pm[j%2]);p.position.y=.2;pv.rotation.z=j/14*6.283;pv.add(p);g.add(pv)}
   g.scale.setScalar(1.5+i*.12);g.userData={x:(i%2?1:-1)*(4.2+i*.7),y:.5+i*1.1,z:-2.5-i*.5};g.position.set(g.userData.x,g.userData.y,g.userData.z);sc.add(g);return g});
-// polvos iluminadores
 const N=mob?350:800,dp=new Float32Array(N*3),dv=new Float32Array(N*3),org=i=>{dp[i*3]=(Math.random()-.5)*4.4;dp[i*3+1]=.2+Math.random()*1;dp[i*3+2]=(Math.random()-.5)*1.6};
 for(let i=0;i<N;i++){org(i);dv[i*3]=(Math.random()-.5)*.6;dv[i*3+1]=.15+Math.random()*.5;dv[i*3+2]=(Math.random()-.5)*.5}
 const dg=new Th.BufferGeometry();dg.setAttribute('position',new Th.BufferAttribute(dp,3));
 const dm=new Th.PointsMaterial({map:dotT,size:.12,transparent:true,opacity:0,depthWrite:false,blending:Th.AdditiveBlending,color:0xffd9a8});sc.add(new Th.Points(dg,dm));
-// destellos
 const sp=Array.from({length:12},(_,i)=>{const s=new Th.Sprite(new Th.SpriteMaterial({map:starT,transparent:true,depthWrite:false,blending:Th.AdditiveBlending,color:0xfff0c8}));sc.add(s);return s});
 const K=[[0,[0,1.6,10],[0,.6,0]],[.25,[0,1.5,7.6],[0,.9,0]],[.5,[0,2.3,7.2],[0,1.9,0]],[.72,[0,2.7,3.9],[0,.9,.3]],[1,[3.2,2.6,7],[0,1.8,0]]];
 const caps=[...fx.querySelectorAll('.cp')],W=[[-1,0,.12,.2],[.2,.27,.42,.48],[.5,.56,.68,.74],[.8,.88,9,10]];
@@ -375,17 +439,13 @@ function frame(now){requestAnimationFrame(frame);if(document.hidden)return;const
   t+=dt;P+=(tgt-P)*Math.min(1,dt*5);
   const e=rg(P,0,.24),u=rg(P,.22,.5),o=rg(P,.5,.72),fin=rg(P,.78,1);
   van.position.y=(1-e)*-7;
-  // cámara
   let i=0;while(i<K.length-2&&P>K[i+1][0])i++;const a=K[i],c=K[i+1],k=sm((P-a[0])/(c[0]-a[0]));
   cam.position.set(lp(a[1][0],c[1][0],k)+Math.sin(t*.3)*.15,lp(a[1][1],c[1][1],k),lp(a[1][2],c[1][2],k));cam.lookAt(lp(a[2][0],c[2][0],k),lp(a[2][1],c[2][1],k),lp(a[2][2],c[2][2],k));
-  // estuche
   lidP.rotation.x=-2.05*o;const ib=rg(P,.56,.74);inn.scale.setScalar(.01+.99*ib);inn.position.y=.31+.08*ib;gl.intensity=o*1.8*(1-.4*fin);
-  // objetos
   IT.forEach(({g,b:bp,i})=>{const n=IT.length,an=i/n*6.283+P*1.6+t*.1,rr=2.6+(i%3)*.4+1.8*rg(P,.4,.62)*(1-fin),
     tx=Math.cos(an)*rr,ty=2.2+(i%4)*.45+Math.sin(t*.9+i)*.12,tz=Math.sin(an)*rr-.3;
     g.position.set(lp(bp.x,tx,u),lp(bp.y+van.position.y,ty,u),lp(bp.z,tz,u));g.rotation.y+=dt*(.3+u*.7);g.rotation.z=Math.sin(t*.6+i)*.12*u});
   sp.forEach((s,j)=>{const g=IT[j%IT.length].g,v=fin*(.4+.6*Math.sin(t*3+j*1.7)**2);s.position.set(g.position.x+.25,g.position.y+.45,g.position.z+.1);s.scale.setScalar(.25+.5*v);s.material.opacity=v});
-  // nubes
   const f=1-rg(P,.04,.3);clouds.forEach(s=>{const d=s.userData,w=(1-f);s.position.set(d.x+Math.sign(d.x)*w*7+Math.sin(t*.1+d.ph)*.6,d.y+w*1.2,d.z);s.material.opacity=d.o*(.22+.78*f)});
   petals.forEach(m=>{const d=m.userData;m.position.y-=d.v*dt;m.position.x+=Math.sin(t*.7+d.ph)*.4*dt;m.rotation.x+=dt*d.s;m.rotation.z+=dt*.6;if(m.position.y<-3.2)m.position.y=7});
   const dmt=rg(P,.2,.5);dm.opacity=.15+.8*dmt;for(let j=0;j<N;j++){const q=j*3;dp[q]+=dv[q]*dt*(.4+dmt);dp[q+1]+=dv[q+1]*dt*(.4+dmt);dp[q+2]+=dv[q+2]*dt*(.4+dmt);if(dp[q+1]>6.5)org(j)}dg.attributes.position.needsUpdate=true;
