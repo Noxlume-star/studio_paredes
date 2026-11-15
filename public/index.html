@@ -105,6 +105,20 @@ section>*{position:relative;z-index:1}section>.df{position:absolute;z-index:0;op
 .ar{display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:center;margin:6px 0}.ar label{font-size:.85rem;color:var(--mut)}
 #adm input[type=range]{padding:0;border:0;background:none}
 #btnUp:disabled{opacity:.45;cursor:not-allowed}
+#cur{position:fixed;inset:0;z-index:55;visibility:hidden;background:var(--bg)}
+#cur.on{visibility:visible}
+#cur .curIn{position:absolute;inset:0;overflow-y:auto;opacity:0;transition:opacity 1s ease .35s;padding-bottom:60px}
+#cur.open .curIn{opacity:1}
+.curH{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.curH h3{font-size:1.7rem;color:var(--gold)}
+#curG{max-width:1080px;margin:0 auto;padding:22px}
+#curE{text-align:center;color:var(--mut);padding:40px 22px}
+.cc{position:absolute;top:0;bottom:0;width:50%;z-index:2;background:repeating-linear-gradient(90deg,#4a3410 0 26px,#2e200b 26px 52px);transition:transform 1.25s cubic-bezier(.7,0,.2,1);pointer-events:none}
+.cc::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.35),transparent 18%,transparent 82%,rgba(0,0,0,.35))}
+.cL{left:0;border-right:3px solid var(--gold)}.cR{right:0;border-left:3px solid var(--gold)}
+#cur.open .cL{transform:translateX(-101%)}
+#cur.open .cR{transform:translateX(101%)}
+.pc{position:absolute;top:8px;left:8px;z-index:2}
 #ed{max-width:390px;width:94%;padding:16px}#edc{display:block;border-radius:12px;touch-action:none;background:#000;cursor:grab;margin:0 auto}
 #ed label{display:block;font-size:.8rem;margin-top:8px;color:var(--mut)}#ed input[type=range]{width:100%;padding:0;border:0}
 .er{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center}.er .btn{padding:10px 18px}
@@ -130,7 +144,7 @@ section>*{position:relative;z-index:1}section>.df{position:absolute;z-index:0;op
 <section id="servicios"><span class="eb">Lo que hago</span><h2>Servicios</h2><p class="lead">Elige tu experiencia de belleza</p><div class="grid" id="svc"></div>
   <div class="home"><h3>Servicio a domicilio</h3><p id="homeT"></p><p class="price" id="homeC"></p></div></section>
 <section id="pop" hidden><span class="eb">Favoritos de mis clientas</span><h2>Más solicitados</h2><div class="grid" id="pp" style="margin-top:34px"></div></section>
-<section id="galeria" hidden><span class="eb">Portafolio</span><h2>Categorías</h2><div class="cats" id="cats"></div><h3 class="gt" id="gt-mak">Maquillaje</h3><div class="gal" id="gal-mak"></div><h3 class="gt" id="gt-pes">Pestañas</h3><div class="gal" id="gal-pes"></div></section>
+<section id="galeria" hidden><span class="eb">Portafolio</span><h2>Categorías</h2><p class="lead">Toca una categoría para ver sus fotos</p><div class="cats" id="cats"></div></section>
 <section id="ofertas" hidden style="padding-bottom:0"><span class="eb">Por tiempo limitado</span><h2>Ofertas especiales</h2><div class="grid" id="off"></div></section>
 <section id="sobre"><div class="bg2"><div class="bi"><div class="bf" id="bf"></div></div><div class="bt"><span class="eb">Conóceme</span><h2>Studio Paredes</h2><div class="about" id="about"></div><div class="chips"><span>Servicio a domicilio</span><span>Productos de calidad</span><span>Trato cálido</span></div></div></div></section>
 <section id="certificaciones" hidden><span class="eb">Formación</span><h2>Certificaciones</h2><div class="grid" id="ct" style="margin-top:34px"></div></section>
@@ -149,6 +163,7 @@ section>*{position:relative;z-index:1}section>.df{position:absolute;z-index:0;op
   <div class="fb"><div>© <span id="yr"></span> Studio Paredes · Isabel Paredes Makeup Studio. Todos los derechos reservados.</div><small>Hecho por Alec Towers</small><small><a href="#" id="lock" style="display:inline">Acceso privado</a></small></div>
 </footer>
 <a class="wa" id="waFab" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></a>
+<div id="cur" aria-hidden="true"><div class="curIn"><div class="curH"><button class="btn b3" type="button" onclick="closeCat()">← Volver</button><h3 id="curT"></h3></div><div class="gal" id="curG"></div><p id="curE"></p></div><div class="cc cL"></div><div class="cc cR"></div></div>
 <div id="lb" hidden><img alt=""></div>
 <dialog id="ed"><h3 style="color:var(--gold);margin:0 0 8px">Ajustar foto</h3><canvas id="edc"></canvas><p style="font-size:.8rem;color:var(--mut);margin:6px 0 0">Arrastra la foto para moverla.</p><div class="er"><button class="btn b3" id="edl" type="button">⟲ 90°</button><button class="btn b3" id="edr" type="button">⟳ 90°</button></div><label>Ángulo<input id="eda" type="range" min="-45" max="45" step=".5" value="0"></label><label>Zoom (recorte)<input id="edz" type="range" min="1" max="3" step=".01" value="1"></label><div class="er"><button class="btn b2" id="edok" type="button">Aplicar</button><button class="btn b3" id="edno" type="button">Cancelar</button></div></dialog>
 <dialog id="dlg"><form method="dialog" onsubmit="return false"><h3 style="color:var(--gold)">Acceso privado</h3><input id="pw" type="password" placeholder="Contraseña" autocomplete="off"><div id="dm" style="color:#b3261e;min-height:1.4em"></div><a href="#" id="fg" style="color:var(--gold);font-size:.85rem">¿Olvidaste tu contraseña?</a><div id="rcv" hidden><input id="rc" placeholder="Código de recuperación" autocomplete="off"><input id="np" type="password" placeholder="Nueva contraseña (mín. 8 caracteres)" autocomplete="new-password"><button class="btn b2" id="rcb" type="button" style="margin-top:6px">Restablecer</button></div><div class="btns" style="margin-top:6px"><button class="btn b2" id="go" type="button">Entrar</button><button class="btn b3" id="cn" type="button">Cerrar</button></div></form></dialog>
@@ -205,12 +220,41 @@ async function api(p,o={}){
 function offers(){const ad=isAd(),L=S.offers.map((o,i)=>[o,i]).filter(([o])=>ad||live(o));
   $('#ofertas').hidden=$('#navOf').hidden=!L.length;
   $('#off').innerHTML=L.map(([o,i])=>`<div class="card off"><span class="tag">${live(o)?'OFERTA':'VENCIDA'}</span><h3>${esc(o.t)}</h3><p>${esc(o.d)}</p><div class="cd">${o.end?(live(o)?'Termina en '+left(o):'Esta oferta terminó'):'Oferta activa'}</div><a href="${wa('Hola Isabel, quiero aprovechar la oferta: '+o.t)}" target="_blank" rel="noopener">Aprovechar →</a>${ad?`<button class="x" onclick="rm('offers',${i})">×</button>`:''}</div>`).join('')}
-function gals(){const ad=isAd();let any=0;
-  for(const k in CATS){const it=S.gal[k];any+=it.length;
-    $('#gal-'+k).innerHTML=it.map((g,i)=>`<div class="t"><img src="${pu(g.id)}" data-lb="${pu(g.id)}" alt="${CATS[k]} por Isabel Paredes" loading="lazy">${ad?`<button class="x" onclick="rmp('${k}',${i})">×</button><button class="x" style="right:42px;background:#a9780f" onclick="editImg('${k}',${i})">✎</button>`:''}</div>`).join('');
-    $('#gt-'+k).hidden=$('#gal-'+k).hidden=!it.length}
-  $('#cats').innerHTML=Object.keys(CATS).filter(k=>S.gal[k].length).map(k=>`<a class="cat" href="#gt-${k}"><img src="${pu(S.gal[k][0].id)}" alt="${CATS[k]}" loading="lazy"><span>${CATS[k]}</span></a>`).join('');
-  $('#galeria').hidden=$('#navG').hidden=!any}
+let CUR=null;
+function gals(){
+  let any=0;
+  for(const k in CATS)any+=S.gal[k].length;
+  $('#cats').innerHTML=Object.keys(CATS).filter(k=>S.gal[k].length).map(k=>`<a class="cat" href="#" onclick="openCat('${k}');return false" aria-label="Ver ${CATS[k]}"><img src="${pu(S.gal[k][0].id)}" alt="${CATS[k]}" loading="lazy"><span>${CATS[k]} · ${S.gal[k].length} foto${S.gal[k].length>1?'s':''}</span></a>`).join('');
+  $('#galeria').hidden=$('#navG').hidden=!any;
+  if(CUR&&$('#cur').classList.contains('on'))renderCat();
+}
+function renderCat(){
+  if(!CUR)return;
+  const ad=isAd(),it=S.gal[CUR]||[];
+  $('#curT').textContent=CATS[CUR];
+  $('#curG').innerHTML=it.map((g,i)=>`<div class="t">${i===0?'<span class="tag pc">PORTADA</span>':''}<img src="${pu(g.id)}" data-lb="${pu(g.id)}" alt="${CATS[CUR]} por Isabel Paredes" loading="lazy">${ad?`<button class="x" onclick="rmp('${CUR}',${i})">×</button><button class="x" style="right:42px;background:#a9780f" onclick="editImg('${CUR}',${i})">✎</button>`:''}</div>`).join('');
+  $('#curE').textContent=it.length?'':'Aún no hay fotos en esta categoría.';
+}
+function openCat(k){
+  if(!S.gal[k]||!S.gal[k].length)return;
+  CUR=k;renderCat();
+  const c=$('#cur');
+  c.classList.add('on');c.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  c.querySelector('.curIn').scrollTop=0;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>c.classList.add('open')));
+}
+function closeCat(){
+  const c=$('#cur');
+  c.classList.remove('open');
+  setTimeout(()=>{
+    if(!c.classList.contains('open')){
+      c.classList.remove('on');c.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+  },1300);
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#cur').classList.contains('on')&&$('#lb').hidden)closeCat()});
 function revs(){$('#rv').innerHTML=RV.map(r=>`<div class="card cl"><div class="st5">${'★'.repeat(r.r)}${'☆'.repeat(5-r.r)}</div>“${esc(r.t)}”<b>— ${esc(r.n)}</b></div>`).join('');
   $('#rvl').textContent=RV.length?'Opiniones de quienes ya confiaron en Studio Paredes':'Sé la primera en dejar tu reseña'}
 const sun=z=>{let p='';for(let i=0;i<18;i++)p+=`<ellipse cx="100" cy="40" rx="12" ry="38" fill="${i%2?'#f2b705':'#ffd75e'}" transform="rotate(${i*20} 100 100)"/>`;return `<svg viewBox="0 0 200 200" width="${z}" height="${z}" aria-hidden="true">${p}<circle cx="100" cy="100" r="30" fill="#6b3f12"/><circle cx="100" cy="100" r="21" fill="#4a2a0a"/></svg>`};
@@ -302,7 +346,7 @@ function adm(){
   <h3>Servicios y precios</h3>${S.services.map((s,i)=>`<div class="oc"><div class="row"><input value="${esc(s.n)}" placeholder="Servicio" oninput="S.services[${i}].n=this.value;render()"><input value="${esc(s.d)}" placeholder="Descripción" oninput="S.services[${i}].d=this.value;render()"><input value="${esc(s.p)}" placeholder="Precio (RD$)" oninput="S.services[${i}].p=this.value;render()"><button class="x" onclick="rm('services',${i})">×</button></div><label><input type="checkbox" style="width:auto" ${s.m?'checked':''} onchange="S.services[${i}].m=this.checked;render()"> Más solicitado</label></div>`).join('')}
   <button class="btn b3" onclick="add('services',{n:'Nuevo servicio',d:'Descripción',p:''})">+ Añadir servicio</button>
   <h3>Servicio a domicilio</h3><input value="${esc(S.home.t)}" oninput="set('home.t',this.value)"><input value="${esc(S.home.c)}" placeholder="Costo adicional" oninput="set('home.c',this.value)">
-  <h3>Fotos de maquillaje</h3>${fi('mak')}<h3>Fotos de pestañas</h3>${fi('pes')}<p>Solo aparecen las fotos que subas. Para quitar una, pulsa la × sobre ella.</p>
+  <h3>Fotos de maquillaje</h3>${fi('mak')}<h3>Fotos de pestañas</h3>${fi('pes')}<p>La primera foto de cada categoría es la portada. Si quitas la portada, la siguiente pasa a serlo. Los visitantes ven la portada y, al tocarla, se abren las cortinas con todas las fotos.</p>
   <h3>Certificaciones</h3>${S.certs.map((c,i)=>`<div class="oc"><input value="${esc(c.t)}" placeholder="Título del curso" oninput="S.certs[${i}].t=this.value;render()"><input value="${esc(c.i)}" placeholder="Institución" oninput="S.certs[${i}].i=this.value;render()"><input value="${esc(c.d)}" placeholder="Detalle (año, horas)" oninput="S.certs[${i}].d=this.value;render()">${fi('c',i)}${c.img?`<button class="btn b3" onclick="delImg('c',${i})">Quitar foto</button><button class="btn b3" onclick="editImg('c',${i})">Editar foto</button>`:''}<button class="btn b3" onclick="rm('certs',${i})">Quitar certificación</button></div>`).join('')}
   <button class="btn b3" onclick="add('certs',{t:'Nueva certificación',i:'Institución',d:'Año · horas'})">+ Añadir certificación</button>
   <h3>Reseñas de clientas</h3>${RA.length?RA.map(r=>`<div class="oc"><b>${esc(r.n)}</b> ${'★'.repeat(r.r)} · ${r.show?'Visible':'Pendiente'}<p>${esc(r.t)}</p><button class="btn b3" onclick="rvSet('${r.id}',${!r.show})">${r.show?'Ocultar':'Mostrar'}</button><button class="btn b3" onclick="rvDel('${r.id}')">Eliminar</button></div>`).join(''):'<p>Aún no hay reseñas.</p>'}
