@@ -56,6 +56,7 @@ section.band{max-width:none;background:var(--dk);color:#f2e8d8;padding:70px 22px
 .sg{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:34px;text-align:center}
 .stat b{display:block;font:600 clamp(2.8rem,9vw,4rem)/1 'Cormorant Garamond',serif;color:var(--g2)}.stat span{letter-spacing:.2em;text-transform:uppercase;font-size:.72rem}
 footer{text-align:center;padding:40px 20px 46px;color:var(--mut);font-size:.88rem}footer a{color:var(--gold)}footer small{display:block;margin-top:8px}
+#mus{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:5;padding:10px 16px;border-radius:999px;border:1px solid var(--gold);background:var(--sf);color:var(--ink);font:inherit;font-size:.85rem;box-shadow:0 8px 22px rgba(0,0,0,.25);cursor:pointer}
 .wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;background:#1f8f4e;display:grid;place-items:center;box-shadow:0 8px 22px rgba(0,0,0,.3);z-index:5}
 .rv{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease}.rv.in{opacity:1;transform:none}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes line{from{width:0}to{width:90px}}
@@ -133,6 +134,7 @@ section>*{position:relative;z-index:1}section>.df{position:absolute;z-index:0;op
   <form class="bk" id="bk" style="margin-top:0"><input id="bn" placeholder="Tu nombre" required autocomplete="name"><select id="bs" required></select><div class="two"><input id="bd" type="date" required><input id="bt" type="time" required></div><input id="ba" placeholder="Dirección o sector donde te atiendo" required><button class="btn b1" type="submit">Enviar solicitud por WhatsApp</button></form>
   <div class="btns"><a class="btn b3" id="waBot" target="_blank" rel="noopener">WhatsApp 829-369-0116</a><a class="btn b3" id="igBot" target="_blank" rel="noopener">@studio.paredes17</a></div></section>
 <section id="stats" class="band" hidden><div class="sg" id="sg"></div></section>
+<button id="mus" hidden onclick="toggleMus()">🔈 Música</button><audio id="bgm" loop preload="none"></audio>
 <div id="adm"></div>
 <footer>
   <div class="fg"><div><h3>Studio Paredes</h3><p>Realzando tu belleza, donde estés. Maquillaje, pestañas, cejas y facial a domicilio.</p></div>
@@ -155,7 +157,7 @@ const API_BASE='https://tpohwxixhwebarnhmfip.supabase.co/functions/v1/studio-api
 const endpoint=p=>`${API_BASE}/${String(p).replace(/^\/+/,'')}`;
 
 const norm=d=>{d.gal=d.gal||{mak:d.gallery||[],pes:[]};delete d.gallery;delete d.slots;delete d.clients;d.offers=d.offers||[];d.stats=d.stats||[];d.photo=d.photo||null;d.brand=d.brand||null;d.certs=d.certs||[{t:'Maquillaje Básico',i:'Escuela Laboral · Ministerio de Educación, Rep. Dominicana',d:'230 horas · 2024'}];return d};
-let S=norm(JSON.parse(JSON.stringify(DEF))),T=sessionStorage.getItem('tk')||'',pi=0,DEL=[],RV=[],RA=[],sv=false,cid=0,ct=0,stars=0,NEWC='',AI={};
+let AUD={buf:null,dur:0,s:0,e:0};let S=norm(JSON.parse(JSON.stringify(DEF))),T=sessionStorage.getItem('tk')||'',pi=0,DEL=[],RV=[],RA=[],sv=false,cid=0,ct=0,stars=0,NEWC='',AI={};
 const wa=t=>WA+'?text='+encodeURIComponent(t);
 ['waTop','waBot','waFab','waFt'].forEach(i=>$('#'+i).href=wa('Hola Isabel, quiero agendar una cita'));['igTop','igBot','igFt'].forEach(i=>$('#'+i).href=IG);
 $('#yr').textContent=new Date().getFullYear();$('#bd').min=new Date().toISOString().slice(0,10);
@@ -206,7 +208,7 @@ function gals(){const ad=isAd();let any=0;
 function revs(){$('#rv').innerHTML=RV.map(r=>`<div class="card cl"><div class="st5">${'★'.repeat(r.r)}${'☆'.repeat(5-r.r)}</div>“${esc(r.t)}”<b>— ${esc(r.n)}</b></div>`).join('');
   $('#rvl').textContent=RV.length?'Opiniones de quienes ya confiaron en Studio Paredes':'Sé la primera en dejar tu reseña'}
 const sun=z=>{let p='';for(let i=0;i<18;i++)p+=`<ellipse cx="100" cy="40" rx="12" ry="38" fill="${i%2?'#f2b705':'#ffd75e'}" transform="rotate(${i*20} 100 100)"/>`;return `<svg viewBox="0 0 200 200" width="${z}" height="${z}" aria-hidden="true">${p}<circle cx="100" cy="100" r="30" fill="#6b3f12"/><circle cx="100" cy="100" r="21" fill="#4a2a0a"/></svg>`};
-function render(){
+function render(){setMus();
   $('#about').textContent=S.about;$('#phw').hidden=!S.photo;if(S.photo)$('#ph').src=pu(S.photo.id);
   $('#svc').innerHTML=S.services.map((s,i)=>`<div class="card"><span class="no">${String(i+1).padStart(2,'0')}</span><h3>${esc(s.n)}</h3><p>${esc(s.d)}</p><div class="price">${s.p?esc(s.p):'Consultar precio'}</div><a href="${wa('Hola Isabel, me interesa el servicio de '+s.n)}" target="_blank" rel="noopener">Reservar →</a></div>`).join('');
   $('#homeT').textContent=S.home.t;$('#homeC').textContent=S.home.c;
@@ -285,6 +287,7 @@ function adm(){
   $('#adm').innerHTML=`<h2>Panel de Isabel</h2><p style="text-align:center">Edita y pulsa «Publicar cambios» al final. Las reseñas se aprueban al instante, sin publicar.</p>
   <h3>Mi foto (opcional)</h3>${S.photo?`<img src="${pu(S.photo.id)}" style="width:90px;height:90px;border-radius:50%;object-fit:cover"><br><button class="btn b3" onclick="delImg('p')">Quitar foto</button> <button class="btn b3" onclick="editImg('p')">Editar foto</button>`:'<p>Sin foto: la página se ve normal, sin ningún espacio.</p>'}${fi('p')}
   <h3>Imagen de la presentación (sección Studio Paredes)</h3>${S.brand?`<img src="${pu(S.brand.id)}" style="width:90px;height:110px;border-radius:12px;object-fit:cover"><br><button class="btn b3" onclick="delImg('b')">Quitar imagen</button> <button class="btn b3" onclick="editImg('b')">Editar imagen</button>`:'<p>Sin imagen propia se muestra tu foto de perfil o, si no hay, el girasol. Sube una imagen vertical para cambiarlo.</p>'}${fi('b')}
+  ${audSec()}
   <h3>Sobre mí</h3><textarea rows="4" oninput="set('about',this.value)">${esc(S.about)}</textarea>
   <h3>Ofertas con tiempo limitado</h3>${S.offers.map((o,i)=>`<div class="oc"><input value="${esc(o.t)}" placeholder="Título (ej. 20% en pestañas)" oninput="S.offers[${i}].t=this.value;offers()"><input value="${esc(o.d)}" placeholder="Detalle" oninput="S.offers[${i}].d=this.value;offers()"><div class="dur">Dura: <button onclick="dur(${i},24)">24 h</button><button onclick="dur(${i},72)">3 días</button><button onclick="dur(${i},168)">7 días</button><button onclick="dur(${i},360)">15 días</button><button onclick="dur(${i},0)">Sin fin</button></div>Termina el: <input type="datetime-local" value="${loc(o.end)}" oninput="S.offers[${i}].end=this.value?new Date(this.value).toISOString():'';offers()"><button class="btn b3" onclick="rm('offers',${i})">Quitar oferta</button></div>`).join('')}
   <button class="btn b3" onclick="add('offers',{t:'Nueva oferta',d:'Detalle de la oferta',end:new Date(Date.now()+6048e5).toISOString()})">+ Añadir oferta</button>
@@ -417,6 +420,38 @@ function fx2(){if(!(window.gsap&&window.ScrollTrigger)||isAd()||matchMedia('(pre
 addEventListener('load',()=>{if(window.gsap&&window.ScrollTrigger){gsap.registerPlugin(ScrollTrigger);
   $$('.df').forEach(el=>{const sp=+el.dataset.sp;gsap.fromTo(el,{yPercent:-25*sp,rotation:-12},{yPercent:25*sp,rotation:24,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}})});
   gsap.fromTo('#bf',{scale:.7,borderRadius:'220px'},{scale:1,borderRadius:'20px',ease:'none',scrollTrigger:{trigger:'.bi',start:'top 92%',end:'top 35%',scrub:true}})}fx2()});
+// ===== MÚSICA DE FONDO =====
+const au=id=>endpoint('audio/'+encodeURIComponent(id));
+function setMus(){const b=$('#mus'),a=$('#bgm');if(!b||!a)return;b.hidden=!S.audio;if(S.audio&&a.dataset.id!==S.audio.id){a.src=au(S.audio.id);a.dataset.id=S.audio.id}}
+function toggleMus(){const a=$('#bgm'),b=$('#mus');if(a.paused){a.play().then(()=>b.textContent='🔊 Apagar música').catch(()=>{})}else{a.pause();b.textContent='🔈 Encender música'}}
+function audSec(){const A=AUD;return `<h3>Música de fondo (máximo 1 minuto)</h3>${S.audio?`<p>Hay una pista lista. Tus visitantes la encienden o apagan con el botón.</p><button class="btn b3" onclick="delAud()">Quitar música</button>`:'<p>Sube un audio o un video. Se convierte a audio y tú eliges el fragmento de hasta 1 minuto.</p>'}<input type="file" accept="audio/*,video/*" onchange="pickAud(this.files[0])">${A.buf?`<div class="aud"><label>Inicio (s) <input type="number" min="0" step="0.5" value="${A.s}" onchange="audSet('s',this.value)"></label><label>Fin (s) <input type="number" min="0" step="0.5" value="${A.e}" onchange="audSet('e',this.value)"></label><p>Fragmento: ${(A.e-A.s).toFixed(1)} s · máximo 60 s · archivo de ${A.dur.toFixed(1)} s</p><button class="btn b1" onclick="audUp()">Convertir y subir</button></div>`:''}`}
+async function pickAud(f){if(!f)return;msg('Leyendo archivo…');
+  try{const ac=new (window.AudioContext||window.webkitAudioContext)();const buf=await ac.decodeAudioData(await f.arrayBuffer());
+    AUD={buf,dur:buf.duration,s:0,e:Math.min(60,buf.duration)};adm();msg('Elige el fragmento (máximo 1 minuto)')}
+  catch(e){msg('No se pudo leer ese archivo. Prueba con MP3, M4A o MP4.')}}
+function audSet(k,v){if(!AUD.buf)return;let x=Math.max(0,Math.min(AUD.dur,+v||0));AUD[k]=x;
+  if(AUD.e<=AUD.s)AUD.e=Math.min(AUD.dur,AUD.s+1);
+  if(AUD.e-AUD.s>60){if(k==='s')AUD.e=AUD.s+60;else AUD.s=AUD.e-60}
+  adm()}
+function loadLame(){return window.lamejs?Promise.resolve(window.lamejs):new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js';s.onload=()=>ok(window.lamejs);s.onerror=()=>no(new Error('No cargó el conversor'));document.head.appendChild(s)})}
+async function audUp(){if(!AUD.buf)return;msg('Convirtiendo a MP3…');
+  try{const L=await loadLame();const {buf,s,e}=AUD;const sr=buf.sampleRate;
+    const i0=Math.floor(s*sr),i1=Math.floor(Math.min(e,buf.duration)*sr),n=i1-i0;
+    const c0=buf.getChannelData(0),c1=buf.numberOfChannels>1?buf.getChannelData(1):null;
+    const pcm=new Int16Array(n);
+    for(let i=0;i<n;i++){let v=c1?(c0[i0+i]+c1[i0+i])/2:c0[i0+i];v=Math.max(-1,Math.min(1,v));pcm[i]=v<0?v*0x8000:v*0x7FFF}
+    const enc=new L.Mp3Encoder(1,sr,96);const parts=[];const B=1152;
+    for(let i=0;i<n;i+=B){const c=enc.encodeBuffer(pcm.subarray(i,i+B));if(c.length)parts.push(c)}
+    const end=enc.flush();if(end.length)parts.push(end);
+    const bl=new Blob(parts,{type:'audio/mpeg'});
+    if(bl.size>3e6){msg('El fragmento pesa demasiado. Elige uno más corto.');return}
+    msg('Subiendo audio…');
+    const r=await api('audio',{method:'POST',headers:{'content-type':'audio/mpeg'},body:bl});
+    const d=await r.json();
+    if(!d.id)throw new Error('El servidor no devolvió el ID del audio');
+    S.audio={id:d.id};AUD={buf:null,dur:0,s:0,e:0};render();adm();msg('Listo. Pulsa «Publicar cambios».')}
+  catch(e){msg('No se pudo subir el audio: '+e.message)}}
+function delAud(){S.audio=null;render();adm();msg('Música quitada. Pulsa «Publicar cambios».')}
 async function save(){
   msg('Guardando cambios…');
 
