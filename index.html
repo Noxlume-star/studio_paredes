@@ -17,7 +17,7 @@ section{max-width:1080px;margin:0 auto;padding:84px 22px}
 h2{font-size:clamp(2rem,6vw,2.9rem);text-align:center;margin:8px 0 14px;line-height:1.1}
 h2::after{content:"";display:block;width:56px;height:1px;background:var(--gold);margin:18px auto 0}
 .lead{text-align:center;color:var(--mut);max-width:560px;margin:0 auto 38px}
-nav{position:sticky;top:0;z-index:20;display:flex;gap:26px;justify-content:center;flex-wrap:wrap;padding:14px 16px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
+nav{position:sticky;top:0;z-index:20;display:flex;gap:26px;justify-content:center;flex-wrap:wrap;padding:14px 60px 14px 16px;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
 nav a{color:var(--ink);text-decoration:none;font-weight:400}nav a:hover{color:var(--gold)}
 .hero{text-align:center;padding:84px 22px 76px;background:radial-gradient(ellipse at 50% -10%,rgba(212,169,74,.24),transparent 62%)}
 #phw{width:142px;height:142px;margin:0 auto 26px;border-radius:50%;padding:4px;background:linear-gradient(135deg,var(--g2),var(--gold))}
@@ -56,7 +56,7 @@ section.band{max-width:none;background:var(--dk);color:#f2e8d8;padding:70px 22px
 .sg{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:34px;text-align:center}
 .stat b{display:block;font:600 clamp(2.8rem,9vw,4rem)/1 'Cormorant Garamond',serif;color:var(--g2)}.stat span{letter-spacing:.2em;text-transform:uppercase;font-size:.72rem}
 footer{text-align:center;padding:40px 20px 46px;color:var(--mut);font-size:.88rem}footer a{color:var(--gold)}footer small{display:block;margin-top:8px}
-#mus{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:5;padding:10px 16px;border-radius:999px;border:1px solid var(--gold);background:var(--sf);color:var(--ink);font:inherit;font-size:.85rem;box-shadow:0 8px 22px rgba(0,0,0,.25);cursor:pointer}
+#mus{position:fixed;top:8px;right:12px;z-index:30;width:40px;height:40px;border-radius:50%;border:1px solid var(--gold);background:var(--sf);color:var(--ink);font-size:1.05rem;line-height:1;display:grid;place-items:center;padding:0;box-shadow:0 6px 18px rgba(0,0,0,.2);cursor:pointer}
 .wa{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));width:56px;height:56px;border-radius:50%;background:#1f8f4e;display:grid;place-items:center;box-shadow:0 8px 22px rgba(0,0,0,.3);z-index:5}
 .rv{opacity:0;transform:translateY(20px);transition:opacity .9s ease,transform .9s ease}.rv.in{opacity:1;transform:none}
 @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes line{from{width:0}to{width:90px}}
@@ -99,6 +99,26 @@ section>*{position:relative;z-index:1}section>.df{position:absolute;z-index:0;op
 .fb{border-top:1px solid var(--line);padding:20px 20px 0;max-width:1000px;margin:0 auto}
 @media (max-width:760px){#sobre .bg2,.fg{grid-template-columns:1fr}.bt h2,.bt .eb{text-align:center}.bt h2::after{margin-left:auto}.bt .about{text-align:center}.chips{justify-content:center}}
 
+#wf{width:100%;height:90px;display:block;border-radius:10px;background:var(--line);cursor:ew-resize;touch-action:none;margin:10px 0}
+.aud{border:1px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+.aud p{margin:6px 0;color:var(--mut);font-size:.9rem}
+.ar{display:grid;grid-template-columns:70px 1fr;gap:10px;align-items:center;margin:6px 0}.ar label{font-size:.85rem;color:var(--mut)}
+#adm input[type=range]{padding:0;border:0;background:none}
+#btnUp:disabled{opacity:.45;cursor:not-allowed}
+#cur{position:fixed;inset:0;z-index:55;visibility:hidden;background:var(--bg)}
+#cur.on{visibility:visible}
+#cur .curIn{position:absolute;inset:0;overflow-y:auto;opacity:0;transition:opacity 1s ease .35s;padding-bottom:60px}
+#cur.open .curIn{opacity:1}
+.curH{position:sticky;top:0;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.curH h3{font-size:1.7rem;color:var(--gold)}
+#curG{max-width:1080px;margin:0 auto;padding:22px}
+#curE{text-align:center;color:var(--mut);padding:40px 22px}
+.cc{position:absolute;top:0;bottom:0;width:50%;z-index:2;background:repeating-linear-gradient(90deg,#4a3410 0 26px,#2e200b 26px 52px);transition:transform 1.25s cubic-bezier(.7,0,.2,1);pointer-events:none}
+.cc::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.35),transparent 18%,transparent 82%,rgba(0,0,0,.35))}
+.cL{left:0;border-right:3px solid var(--gold)}.cR{right:0;border-left:3px solid var(--gold)}
+#cur.open .cL{transform:translateX(-101%)}
+#cur.open .cR{transform:translateX(101%)}
+.pc{position:absolute;top:8px;left:8px;z-index:2}
 #ed{max-width:390px;width:94%;padding:16px}#edc{display:block;border-radius:12px;touch-action:none;background:#000;cursor:grab;margin:0 auto}
 #ed label{display:block;font-size:.8rem;margin-top:8px;color:var(--mut)}#ed input[type=range]{width:100%;padding:0;border:0}
 .er{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;justify-content:center}.er .btn{padding:10px 18px}
@@ -124,7 +144,7 @@ section>*{position:relative;z-index:1}section>.df{position:absolute;z-index:0;op
 <section id="servicios"><span class="eb">Lo que hago</span><h2>Servicios</h2><p class="lead">Elige tu experiencia de belleza</p><div class="grid" id="svc"></div>
   <div class="home"><h3>Servicio a domicilio</h3><p id="homeT"></p><p class="price" id="homeC"></p></div></section>
 <section id="pop" hidden><span class="eb">Favoritos de mis clientas</span><h2>Más solicitados</h2><div class="grid" id="pp" style="margin-top:34px"></div></section>
-<section id="galeria" hidden><span class="eb">Portafolio</span><h2>Categorías</h2><div class="cats" id="cats"></div><h3 class="gt" id="gt-mak">Maquillaje</h3><div class="gal" id="gal-mak"></div><h3 class="gt" id="gt-pes">Pestañas</h3><div class="gal" id="gal-pes"></div></section>
+<section id="galeria" hidden><span class="eb">Portafolio</span><h2>Categorías</h2><p class="lead">Toca una categoría para ver sus fotos</p><div class="cats" id="cats"></div></section>
 <section id="ofertas" hidden style="padding-bottom:0"><span class="eb">Por tiempo limitado</span><h2>Ofertas especiales</h2><div class="grid" id="off"></div></section>
 <section id="sobre"><div class="bg2"><div class="bi"><div class="bf" id="bf"></div></div><div class="bt"><span class="eb">Conóceme</span><h2>Studio Paredes</h2><div class="about" id="about"></div><div class="chips"><span>Servicio a domicilio</span><span>Productos de calidad</span><span>Trato cálido</span></div></div></div></section>
 <section id="certificaciones" hidden><span class="eb">Formación</span><h2>Certificaciones</h2><div class="grid" id="ct" style="margin-top:34px"></div></section>
@@ -134,7 +154,7 @@ section>*{position:relative;z-index:1}section>.df{position:absolute;z-index:0;op
   <form class="bk" id="bk" style="margin-top:0"><input id="bn" placeholder="Tu nombre" required autocomplete="name"><select id="bs" required></select><div class="two"><input id="bd" type="date" required><input id="bt" type="time" required></div><input id="ba" placeholder="Dirección o sector donde te atiendo" required><button class="btn b1" type="submit">Enviar solicitud por WhatsApp</button></form>
   <div class="btns"><a class="btn b3" id="waBot" target="_blank" rel="noopener">WhatsApp 829-369-0116</a><a class="btn b3" id="igBot" target="_blank" rel="noopener">@studio.paredes17</a></div></section>
 <section id="stats" class="band" hidden><div class="sg" id="sg"></div></section>
-<button id="mus" hidden onclick="toggleMus()">🔈 Música</button><audio id="bgm" loop preload="none"></audio>
+<button id="mus" hidden title="Música de fondo" aria-label="Música de fondo" onclick="toggleMus()">🔈</button><audio id="bgm" loop preload="none"></audio>
 <div id="adm"></div>
 <footer>
   <div class="fg"><div><h3>Studio Paredes</h3><p>Realzando tu belleza, donde estés. Maquillaje, pestañas, cejas y facial a domicilio.</p></div>
@@ -143,6 +163,7 @@ section>*{position:relative;z-index:1}section>.df{position:absolute;z-index:0;op
   <div class="fb"><div>© <span id="yr"></span> Studio Paredes · Isabel Paredes Makeup Studio. Todos los derechos reservados.</div><small>Hecho por Alec Towers</small><small><a href="#" id="lock" style="display:inline">Acceso privado</a></small></div>
 </footer>
 <a class="wa" id="waFab" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24" width="26" height="26" fill="#fff"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg></a>
+<div id="cur" aria-hidden="true"><div class="curIn"><div class="curH"><button class="btn b3" type="button" onclick="closeCat()">← Volver</button><h3 id="curT"></h3></div><div class="gal" id="curG"></div><p id="curE"></p></div><div class="cc cL"></div><div class="cc cR"></div></div>
 <div id="lb" hidden><img alt=""></div>
 <dialog id="ed"><h3 style="color:var(--gold);margin:0 0 8px">Ajustar foto</h3><canvas id="edc"></canvas><p style="font-size:.8rem;color:var(--mut);margin:6px 0 0">Arrastra la foto para moverla.</p><div class="er"><button class="btn b3" id="edl" type="button">⟲ 90°</button><button class="btn b3" id="edr" type="button">⟳ 90°</button></div><label>Ángulo<input id="eda" type="range" min="-45" max="45" step=".5" value="0"></label><label>Zoom (recorte)<input id="edz" type="range" min="1" max="3" step=".01" value="1"></label><div class="er"><button class="btn b2" id="edok" type="button">Aplicar</button><button class="btn b3" id="edno" type="button">Cancelar</button></div></dialog>
 <dialog id="dlg"><form method="dialog" onsubmit="return false"><h3 style="color:var(--gold)">Acceso privado</h3><input id="pw" type="password" placeholder="Contraseña" autocomplete="off"><div id="dm" style="color:#b3261e;min-height:1.4em"></div><a href="#" id="fg" style="color:var(--gold);font-size:.85rem">¿Olvidaste tu contraseña?</a><div id="rcv" hidden><input id="rc" placeholder="Código de recuperación" autocomplete="off"><input id="np" type="password" placeholder="Nueva contraseña (mín. 8 caracteres)" autocomplete="new-password"><button class="btn b2" id="rcb" type="button" style="margin-top:6px">Restablecer</button></div><div class="btns" style="margin-top:6px"><button class="btn b2" id="go" type="button">Entrar</button><button class="btn b3" id="cn" type="button">Cerrar</button></div></form></dialog>
@@ -199,12 +220,41 @@ async function api(p,o={}){
 function offers(){const ad=isAd(),L=S.offers.map((o,i)=>[o,i]).filter(([o])=>ad||live(o));
   $('#ofertas').hidden=$('#navOf').hidden=!L.length;
   $('#off').innerHTML=L.map(([o,i])=>`<div class="card off"><span class="tag">${live(o)?'OFERTA':'VENCIDA'}</span><h3>${esc(o.t)}</h3><p>${esc(o.d)}</p><div class="cd">${o.end?(live(o)?'Termina en '+left(o):'Esta oferta terminó'):'Oferta activa'}</div><a href="${wa('Hola Isabel, quiero aprovechar la oferta: '+o.t)}" target="_blank" rel="noopener">Aprovechar →</a>${ad?`<button class="x" onclick="rm('offers',${i})">×</button>`:''}</div>`).join('')}
-function gals(){const ad=isAd();let any=0;
-  for(const k in CATS){const it=S.gal[k];any+=it.length;
-    $('#gal-'+k).innerHTML=it.map((g,i)=>`<div class="t"><img src="${pu(g.id)}" data-lb="${pu(g.id)}" alt="${CATS[k]} por Isabel Paredes" loading="lazy">${ad?`<button class="x" onclick="rmp('${k}',${i})">×</button><button class="x" style="right:42px;background:#a9780f" onclick="editImg('${k}',${i})">✎</button>`:''}</div>`).join('');
-    $('#gt-'+k).hidden=$('#gal-'+k).hidden=!it.length}
-  $('#cats').innerHTML=Object.keys(CATS).filter(k=>S.gal[k].length).map(k=>`<a class="cat" href="#gt-${k}"><img src="${pu(S.gal[k][0].id)}" alt="${CATS[k]}" loading="lazy"><span>${CATS[k]}</span></a>`).join('');
-  $('#galeria').hidden=$('#navG').hidden=!any}
+let CUR=null;
+function gals(){
+  let any=0;
+  for(const k in CATS)any+=S.gal[k].length;
+  $('#cats').innerHTML=Object.keys(CATS).filter(k=>S.gal[k].length).map(k=>`<a class="cat" href="#" onclick="openCat('${k}');return false" aria-label="Ver ${CATS[k]}"><img src="${pu(S.gal[k][0].id)}" alt="${CATS[k]}" loading="lazy"><span>${CATS[k]} · ${S.gal[k].length} foto${S.gal[k].length>1?'s':''}</span></a>`).join('');
+  $('#galeria').hidden=$('#navG').hidden=!any;
+  if(CUR&&$('#cur').classList.contains('on'))renderCat();
+}
+function renderCat(){
+  if(!CUR)return;
+  const ad=isAd(),it=S.gal[CUR]||[];
+  $('#curT').textContent=CATS[CUR];
+  $('#curG').innerHTML=it.map((g,i)=>`<div class="t">${i===0?'<span class="tag pc">PORTADA</span>':''}<img src="${pu(g.id)}" data-lb="${pu(g.id)}" alt="${CATS[CUR]} por Isabel Paredes" loading="lazy">${ad?`<button class="x" onclick="rmp('${CUR}',${i})">×</button><button class="x" style="right:42px;background:#a9780f" onclick="editImg('${CUR}',${i})">✎</button>`:''}</div>`).join('');
+  $('#curE').textContent=it.length?'':'Aún no hay fotos en esta categoría.';
+}
+function openCat(k){
+  if(!S.gal[k]||!S.gal[k].length)return;
+  CUR=k;renderCat();
+  const c=$('#cur');
+  c.classList.add('on');c.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  c.querySelector('.curIn').scrollTop=0;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>c.classList.add('open')));
+}
+function closeCat(){
+  const c=$('#cur');
+  c.classList.remove('open');
+  setTimeout(()=>{
+    if(!c.classList.contains('open')){
+      c.classList.remove('on');c.setAttribute('aria-hidden','true');
+      document.body.style.overflow='';
+    }
+  },1300);
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('#cur').classList.contains('on')&&$('#lb').hidden)closeCat()});
 function revs(){$('#rv').innerHTML=RV.map(r=>`<div class="card cl"><div class="st5">${'★'.repeat(r.r)}${'☆'.repeat(5-r.r)}</div>“${esc(r.t)}”<b>— ${esc(r.n)}</b></div>`).join('');
   $('#rvl').textContent=RV.length?'Opiniones de quienes ya confiaron en Studio Paredes':'Sé la primera en dejar tu reseña'}
 const sun=z=>{let p='';for(let i=0;i<18;i++)p+=`<ellipse cx="100" cy="40" rx="12" ry="38" fill="${i%2?'#f2b705':'#ffd75e'}" transform="rotate(${i*20} 100 100)"/>`;return `<svg viewBox="0 0 200 200" width="${z}" height="${z}" aria-hidden="true">${p}<circle cx="100" cy="100" r="30" fill="#6b3f12"/><circle cx="100" cy="100" r="21" fill="#4a2a0a"/></svg>`};
@@ -215,7 +265,7 @@ function render(){setMus();
   const v=$('#bs').value;$('#bs').innerHTML=S.services.map(s=>`<option>${esc(s.n)}</option>`).join('');if(v)$('#bs').value=v;
   const PP=S.services.map((v,i)=>[v,i]).filter(([v])=>v.m);$('#pop').hidden=!PP.length;
   $('#pp').innerHTML=PP.map(([v])=>`<div class="card"><span class="tag">MÁS SOLICITADO</span><h3>${esc(v.n)}</h3><p>${esc(v.d)}</p><div class="price">${v.p?esc(v.p):'Consultar precio'}</div><a href="${wa('Hola Isabel, me interesa el servicio de '+v.n)}" target="_blank" rel="noopener">Reservar →</a></div>`).join('');
-  const bi=S.brand?S.brand.id:S.photo?S.photo.id:(S.gal.mak[0]||S.gal.pes[0]||{}).id;$('#bf').innerHTML=bi?`<img src="${pu(bi)}" alt="Isabel Paredes" loading="lazy">`:sun(320);
+  const bi=S.brand?S.brand.id:null;$('#bf').innerHTML=bi?`<img src="${pu(bi)}" alt="Isabel Paredes" loading="lazy">`:sun(320);
   offers();gals();revs();
   $('#certificaciones').hidden=!S.certs.length;
   $('#ct').innerHTML=S.certs.map(c=>`<div class="card ct">${c.img?`<img src="${pu(c.img)}" data-lb="${pu(c.img)}" alt="Certificado ${esc(c.t)}">`:'<div class="ci">✦</div>'}<h3>${esc(c.t)}</h3><p>${esc(c.i)}</p><small>${esc(c.d)}</small></div>`).join('');
@@ -285,8 +335,8 @@ async function rvDel(id){await api('review/'+id,{method:'DELETE'});rvSync()}
 function adm(){
   const fi=(k,i)=>`<input type="file" accept="image/*" ${k==='p'||k==='b'?'':'multiple'} onchange="up(this.files,'${k}',${i||0})">`;
   $('#adm').innerHTML=`<h2>Panel de Isabel</h2><p style="text-align:center">Edita y pulsa «Publicar cambios» al final. Las reseñas se aprueban al instante, sin publicar.</p>
-  <h3>Mi foto (opcional)</h3>${S.photo?`<img src="${pu(S.photo.id)}" style="width:90px;height:90px;border-radius:50%;object-fit:cover"><br><button class="btn b3" onclick="delImg('p')">Quitar foto</button> <button class="btn b3" onclick="editImg('p')">Editar foto</button>`:'<p>Sin foto: la página se ve normal, sin ningún espacio.</p>'}${fi('p')}
-  <h3>Imagen de la presentación (sección Studio Paredes)</h3>${S.brand?`<img src="${pu(S.brand.id)}" style="width:90px;height:110px;border-radius:12px;object-fit:cover"><br><button class="btn b3" onclick="delImg('b')">Quitar imagen</button> <button class="btn b3" onclick="editImg('b')">Editar imagen</button>`:'<p>Sin imagen propia se muestra tu foto de perfil o, si no hay, el girasol. Sube una imagen vertical para cambiarlo.</p>'}${fi('b')}
+  <h3>Foto de portada (solo aparece en la portada)</h3>${S.photo?`<img src="${pu(S.photo.id)}" style="width:90px;height:90px;border-radius:50%;object-fit:cover"><br><button class="btn b3" onclick="delImg('p')">Quitar foto</button> <button class="btn b3" onclick="editImg('p')">Editar foto</button>`:'<p>Sin foto: la página se ve normal, sin ningún espacio.</p>'}${fi('p')}
+  <h3>Imagen de la presentación (sección Studio Paredes)</h3>${S.brand?`<img src="${pu(S.brand.id)}" style="width:90px;height:110px;border-radius:12px;object-fit:cover"><br><button class="btn b3" onclick="delImg('b')">Quitar imagen</button> <button class="btn b3" onclick="editImg('b')">Editar imagen</button>`:'<p>Sin imagen propia se muestra una foto de tu galería o el girasol. Sube una imagen vertical para cambiarlo.</p>'}${fi('b')}
   ${audSec()}
   <h3>Sobre mí</h3><textarea rows="4" oninput="set('about',this.value)">${esc(S.about)}</textarea>
   <h3>Ofertas con tiempo limitado</h3>${S.offers.map((o,i)=>`<div class="oc"><input value="${esc(o.t)}" placeholder="Título (ej. 20% en pestañas)" oninput="S.offers[${i}].t=this.value;offers()"><input value="${esc(o.d)}" placeholder="Detalle" oninput="S.offers[${i}].d=this.value;offers()"><div class="dur">Dura: <button onclick="dur(${i},24)">24 h</button><button onclick="dur(${i},72)">3 días</button><button onclick="dur(${i},168)">7 días</button><button onclick="dur(${i},360)">15 días</button><button onclick="dur(${i},0)">Sin fin</button></div>Termina el: <input type="datetime-local" value="${loc(o.end)}" oninput="S.offers[${i}].end=this.value?new Date(this.value).toISOString():'';offers()"><button class="btn b3" onclick="rm('offers',${i})">Quitar oferta</button></div>`).join('')}
@@ -296,7 +346,7 @@ function adm(){
   <h3>Servicios y precios</h3>${S.services.map((s,i)=>`<div class="oc"><div class="row"><input value="${esc(s.n)}" placeholder="Servicio" oninput="S.services[${i}].n=this.value;render()"><input value="${esc(s.d)}" placeholder="Descripción" oninput="S.services[${i}].d=this.value;render()"><input value="${esc(s.p)}" placeholder="Precio (RD$)" oninput="S.services[${i}].p=this.value;render()"><button class="x" onclick="rm('services',${i})">×</button></div><label><input type="checkbox" style="width:auto" ${s.m?'checked':''} onchange="S.services[${i}].m=this.checked;render()"> Más solicitado</label></div>`).join('')}
   <button class="btn b3" onclick="add('services',{n:'Nuevo servicio',d:'Descripción',p:''})">+ Añadir servicio</button>
   <h3>Servicio a domicilio</h3><input value="${esc(S.home.t)}" oninput="set('home.t',this.value)"><input value="${esc(S.home.c)}" placeholder="Costo adicional" oninput="set('home.c',this.value)">
-  <h3>Fotos de maquillaje</h3>${fi('mak')}<h3>Fotos de pestañas</h3>${fi('pes')}<p>Solo aparecen las fotos que subas. Para quitar una, pulsa la × sobre ella.</p>
+  <h3>Fotos de maquillaje</h3>${fi('mak')}<h3>Fotos de pestañas</h3>${fi('pes')}<p>La primera foto de cada categoría es la portada. Si quitas la portada, la siguiente pasa a serlo. Los visitantes ven la portada y, al tocarla, se abren las cortinas con todas las fotos.</p>
   <h3>Certificaciones</h3>${S.certs.map((c,i)=>`<div class="oc"><input value="${esc(c.t)}" placeholder="Título del curso" oninput="S.certs[${i}].t=this.value;render()"><input value="${esc(c.i)}" placeholder="Institución" oninput="S.certs[${i}].i=this.value;render()"><input value="${esc(c.d)}" placeholder="Detalle (año, horas)" oninput="S.certs[${i}].d=this.value;render()">${fi('c',i)}${c.img?`<button class="btn b3" onclick="delImg('c',${i})">Quitar foto</button><button class="btn b3" onclick="editImg('c',${i})">Editar foto</button>`:''}<button class="btn b3" onclick="rm('certs',${i})">Quitar certificación</button></div>`).join('')}
   <button class="btn b3" onclick="add('certs',{t:'Nueva certificación',i:'Institución',d:'Año · horas'})">+ Añadir certificación</button>
   <h3>Reseñas de clientas</h3>${RA.length?RA.map(r=>`<div class="oc"><b>${esc(r.n)}</b> ${'★'.repeat(r.r)} · ${r.show?'Visible':'Pendiente'}<p>${esc(r.t)}</p><button class="btn b3" onclick="rvSet('${r.id}',${!r.show})">${r.show?'Ocultar':'Mostrar'}</button><button class="btn b3" onclick="rvDel('${r.id}')">Eliminar</button></div>`).join(''):'<p>Aún no hay reseñas.</p>'}
@@ -421,21 +471,118 @@ addEventListener('load',()=>{if(window.gsap&&window.ScrollTrigger){gsap.register
   $$('.df').forEach(el=>{const sp=+el.dataset.sp;gsap.fromTo(el,{yPercent:-25*sp,rotation:-12},{yPercent:25*sp,rotation:24,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:true}})});
   gsap.fromTo('#bf',{scale:.7,borderRadius:'220px'},{scale:1,borderRadius:'20px',ease:'none',scrollTrigger:{trigger:'.bi',start:'top 92%',end:'top 35%',scrub:true}})}fx2()});
 // ===== MÚSICA DE FONDO =====
+const MAX_AUD=60;
 const au=id=>endpoint('audio/'+encodeURIComponent(id));
-function setMus(){const b=$('#mus'),a=$('#bgm');if(!b||!a)return;b.hidden=!S.audio;if(S.audio&&a.dataset.id!==S.audio.id){a.src=au(S.audio.id);a.dataset.id=S.audio.id}}
-function toggleMus(){const a=$('#bgm'),b=$('#mus');if(a.paused){a.play().then(()=>b.textContent='🔊 Apagar música').catch(()=>{})}else{a.pause();b.textContent='🔈 Encender música'}}
-function audSec(){const A=AUD;return `<h3>Música de fondo (máximo 1 minuto)</h3>${S.audio?`<p>Hay una pista lista. Tus visitantes la encienden o apagan con el botón.</p><button class="btn b3" onclick="delAud()">Quitar música</button>`:'<p>Sube un audio o un video. Se convierte a audio y tú eliges el fragmento de hasta 1 minuto.</p>'}<input type="file" accept="audio/*,video/*" onchange="pickAud(this.files[0])">${A.buf?`<div class="aud"><label>Inicio (s) <input type="number" min="0" step="0.5" value="${A.s}" onchange="audSet('s',this.value)"></label><label>Fin (s) <input type="number" min="0" step="0.5" value="${A.e}" onchange="audSet('e',this.value)"></label><p>Fragmento: ${(A.e-A.s).toFixed(1)} s · máximo 60 s · archivo de ${A.dur.toFixed(1)} s</p><button class="btn b1" onclick="audUp()">Convertir y subir</button></div>`:''}`}
+const fmt=t=>{const m=Math.floor(t/60),s=(t%60).toFixed(1).padStart(4,'0');return m+':'+s};
+function setMus(){const b=$('#mus'),a=$('#bgm');if(!b||!a)return;b.hidden=!S.audio;if(S.audio&&a.dataset.id!==S.audio.id){a.src=au(S.audio.id);a.dataset.id=S.audio.id;b.textContent='🔈'}}
+function toggleMus(){const a=$('#bgm'),b=$('#mus');if(a.paused){a.play().then(()=>b.textContent='🔊').catch(()=>{})}else{a.pause();b.textContent='🔈'}}
+
+function audSec(){const A=AUD;return `<h3>Música de fondo</h3>
+  ${S.audio?`<p>Hay una pista guardada. Tus visitantes la encienden o apagan con el botón 🔈 de la esquina superior derecha.</p><button class="btn b3" type="button" onclick="delAud()">Quitar música</button>`:'<p>Sube un audio o un video. Antes de subirlo tienes que elegir el fragmento (máximo 1 minuto).</p>'}
+  <input type="file" accept="audio/*,video/*" onchange="pickAud(this.files[0])">
+  ${A.buf?`<div class="aud">
+    <p>Arrastra las líneas de la onda o usa los deslizadores para elegir el fragmento.</p>
+    <canvas id="wf" onpointerdown="wfDown(event)" onpointermove="wfMove(event)" onpointerup="wfUp()" onpointercancel="wfUp()"></canvas>
+    <div class="ar"><label>Inicio <b id="tS"></b></label><input type="range" id="rS" min="0" max="${A.dur}" step="0.1" value="${A.s}" oninput="audSet('s',this.value)"></div>
+    <div class="ar"><label>Fin <b id="tE"></b></label><input type="range" id="rE" min="0" max="${A.dur}" step="0.1" value="${A.e}" oninput="audSet('e',this.value)"></div>
+    <p id="aInfo"></p>
+    <div class="er"><button class="btn b3" type="button" onclick="audPrev()">▶ Escuchar fragmento</button><button class="btn b1" id="btnUp" type="button" onclick="audUp()" disabled>Confirmar y subir</button></div>
+  </div>`:''}`}
+
 async function pickAud(f){if(!f)return;msg('Leyendo archivo…');
-  try{const ac=new (window.AudioContext||window.webkitAudioContext)();const buf=await ac.decodeAudioData(await f.arrayBuffer());
-    AUD={buf,dur:buf.duration,s:0,e:Math.min(60,buf.duration)};adm();msg('Elige el fragmento (máximo 1 minuto)')}
-  catch(e){msg('No se pudo leer ese archivo. Prueba con MP3, M4A o MP4.')}}
-function audSet(k,v){if(!AUD.buf)return;let x=Math.max(0,Math.min(AUD.dur,+v||0));AUD[k]=x;
-  if(AUD.e<=AUD.s)AUD.e=Math.min(AUD.dur,AUD.s+1);
-  if(AUD.e-AUD.s>60){if(k==='s')AUD.e=AUD.s+60;else AUD.s=AUD.e-60}
-  adm()}
+  try{
+    if(AUD.pac)AUD.pac.close().catch(()=>{});
+    const ac=new (window.AudioContext||window.webkitAudioContext)();
+    const buf=await ac.decodeAudioData(await f.arrayBuffer());
+    ac.close().catch(()=>{});
+    if(buf.duration>900){msg('El archivo dura más de 15 minutos. Usa uno más corto.');return}
+    AUD={buf,dur:buf.duration,s:0,e:Math.min(MAX_AUD,buf.duration),touched:false,drag:null,pac:null,src:null};
+    adm();drawWave();updAud();
+    msg('Elige el fragmento, escúchalo y luego confirma para subir.');
+  }catch(e){
+    msg('Este dispositivo no pudo leer ese archivo. Prueba con MP3 o M4A, o convierte el video a audio antes.');
+  }}
+
+function setRange(k,t){
+  t=Math.max(0,Math.min(AUD.dur,t));
+  if(k==='s'){
+    AUD.s=Math.min(t,AUD.dur-0.5);
+    if(AUD.e<AUD.s+0.5)AUD.e=Math.min(AUD.dur,AUD.s+0.5);
+    if(AUD.e-AUD.s>MAX_AUD)AUD.e=AUD.s+MAX_AUD;
+  }else{
+    AUD.e=Math.max(t,0.5);
+    if(AUD.e>AUD.dur)AUD.e=AUD.dur;
+    if(AUD.s>AUD.e-0.5)AUD.s=Math.max(0,AUD.e-0.5);
+    if(AUD.e-AUD.s>MAX_AUD)AUD.s=AUD.e-MAX_AUD;
+  }
+  AUD.touched=true;
+  updAud();
+}
+function audSet(k,v){if(!AUD.buf)return;setRange(k,+v)}
+
+function updAud(){
+  const rS=$('#rS'),rE=$('#rE');if(!rS||!rE)return;
+  rS.value=AUD.s;rE.value=AUD.e;
+  $('#tS').textContent=fmt(AUD.s);$('#tE').textContent=fmt(AUD.e);
+  const len=AUD.e-AUD.s;
+  $('#aInfo').textContent='Fragmento: '+len.toFixed(1)+' s (máximo 60 s). '+(AUD.touched?'':'Mueve el inicio o el fin para poder subirlo.');
+  const b=$('#btnUp');if(b)b.disabled=!AUD.touched;
+  drawWave();
+}
+
+function drawWave(){
+  const cv=$('#wf');if(!cv||!AUD.buf)return;
+  const W=Math.max(200,cv.clientWidth||300),H=90;
+  cv.width=W;cv.height=H;
+  const g=cv.getContext('2d');
+  g.clearRect(0,0,W,H);
+  const d=AUD.buf.getChannelData(0),step=Math.max(1,Math.floor(d.length/W)),inner=Math.max(1,step>>3);
+  const x0=AUD.s/AUD.dur*W,x1=AUD.e/AUD.dur*W;
+  for(let x=0;x<W;x++){
+    let m=0;const st=x*step;
+    for(let j=0;j<step;j+=inner){const v=Math.abs(d[st+j]||0);if(v>m)m=v}
+    const h=Math.max(1,m*H*0.46);
+    g.fillStyle=(x>=x0&&x<=x1)?'#a9780f':'rgba(120,100,60,.35)';
+    g.fillRect(x,H/2-h,1,2*h);
+  }
+  g.fillStyle='#a9780f';
+  g.fillRect(x0-1,0,3,H);
+  g.fillRect(x1-2,0,3,H);
+}
+function wfDown(e){
+  if(!AUD.buf)return;
+  const cv=e.currentTarget,r=cv.getBoundingClientRect(),x=e.clientX-r.left;
+  const sx=AUD.s/AUD.dur*r.width,ex=AUD.e/AUD.dur*r.width;
+  AUD.drag=Math.abs(x-sx)<=Math.abs(x-ex)?'s':'e';
+  cv.setPointerCapture(e.pointerId);
+  wfMove(e);
+}
+function wfMove(e){
+  if(!AUD.buf||!AUD.drag)return;
+  const r=e.currentTarget.getBoundingClientRect();
+  setRange(AUD.drag,(e.clientX-r.left)/r.width*AUD.dur);
+}
+function wfUp(){if(AUD)AUD.drag=null}
+
+function audPrev(){
+  if(!AUD.buf)return;
+  if(!AUD.pac)AUD.pac=new (window.AudioContext||window.webkitAudioContext)();
+  if(AUD.pac.state==='suspended')AUD.pac.resume();
+  if(AUD.src){try{AUD.src.stop()}catch(e){}}
+  const src=AUD.pac.createBufferSource();
+  src.buffer=AUD.buf;src.connect(AUD.pac.destination);
+  src.start(0,AUD.s,AUD.e-AUD.s);
+  AUD.src=src;
+}
+
 function loadLame(){return window.lamejs?Promise.resolve(window.lamejs):new Promise((ok,no)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js';s.onload=()=>ok(window.lamejs);s.onerror=()=>no(new Error('No cargó el conversor'));document.head.appendChild(s)})}
-async function audUp(){if(!AUD.buf)return;msg('Convirtiendo a MP3…');
-  try{const L=await loadLame();const {buf,s,e}=AUD;const sr=buf.sampleRate;
+
+async function audUp(){
+  if(!AUD.buf)return;
+  if(!AUD.touched){msg('Primero elige el inicio y el fin del fragmento');return}
+  msg('Convirtiendo a MP3…');
+  try{
+    const L=await loadLame();const {buf,s,e}=AUD;const sr=buf.sampleRate;
     const i0=Math.floor(s*sr),i1=Math.floor(Math.min(e,buf.duration)*sr),n=i1-i0;
     const c0=buf.getChannelData(0),c1=buf.numberOfChannels>1?buf.getChannelData(1):null;
     const pcm=new Int16Array(n);
@@ -449,9 +596,13 @@ async function audUp(){if(!AUD.buf)return;msg('Convirtiendo a MP3…');
     const r=await api('audio',{method:'POST',headers:{'content-type':'audio/mpeg'},body:bl});
     const d=await r.json();
     if(!d.id)throw new Error('El servidor no devolvió el ID del audio');
-    S.audio={id:d.id};AUD={buf:null,dur:0,s:0,e:0};render();adm();msg('Listo. Pulsa «Publicar cambios».')}
-  catch(e){msg('No se pudo subir el audio: '+e.message)}}
-function delAud(){S.audio=null;render();adm();msg('Música quitada. Pulsa «Publicar cambios».')}
+    S.audio={id:d.id};
+    AUD={buf:null,dur:0,s:0,e:0};
+    render();adm();
+    await save();
+  }catch(e){msg('No se pudo subir el audio: '+e.message)}
+}
+async function delAud(){S.audio=null;render();adm();await save()}
 async function save(){
   msg('Guardando cambios…');
 
