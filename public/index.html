@@ -265,7 +265,7 @@ function render(){setMus();
   const v=$('#bs').value;$('#bs').innerHTML=S.services.map(s=>`<option>${esc(s.n)}</option>`).join('');if(v)$('#bs').value=v;
   const PP=S.services.map((v,i)=>[v,i]).filter(([v])=>v.m);$('#pop').hidden=!PP.length;
   $('#pp').innerHTML=PP.map(([v])=>`<div class="card"><span class="tag">MÁS SOLICITADO</span><h3>${esc(v.n)}</h3><p>${esc(v.d)}</p><div class="price">${v.p?esc(v.p):'Consultar precio'}</div><a href="${wa('Hola Isabel, me interesa el servicio de '+v.n)}" target="_blank" rel="noopener">Reservar →</a></div>`).join('');
-  const bi=S.brand?S.brand.id:(S.gal.mak[0]||S.gal.pes[0]||{}).id;$('#bf').innerHTML=bi?`<img src="${pu(bi)}" alt="Isabel Paredes" loading="lazy">`:sun(320);
+  const bi=S.brand?S.brand.id:null;$('#bf').innerHTML=bi?`<img src="${pu(bi)}" alt="Isabel Paredes" loading="lazy">`:sun(320);
   offers();gals();revs();
   $('#certificaciones').hidden=!S.certs.length;
   $('#ct').innerHTML=S.certs.map(c=>`<div class="card ct">${c.img?`<img src="${pu(c.img)}" data-lb="${pu(c.img)}" alt="Certificado ${esc(c.t)}">`:'<div class="ci">✦</div>'}<h3>${esc(c.t)}</h3><p>${esc(c.i)}</p><small>${esc(c.d)}</small></div>`).join('');
